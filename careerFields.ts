@@ -1,5 +1,5 @@
 import type {CareerField} from "./types";
-const careerFields = [
+const careerFields: CareerField[] = [
   {
     id: "cybersecurity",
     label: "Cybersecurity",
@@ -110,4 +110,4 @@ const careerFields = [
   },
 ];
 
-module.exports = careerFields;
+export default careerFields;

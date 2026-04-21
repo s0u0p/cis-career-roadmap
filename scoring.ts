@@ -13,15 +13,16 @@
  *   const { topThree, allResults } = scoreAssessment(["q1_a", "q2_c", ...]);
  */
 
-const careerFields = require("./careerFields");
-const questions = require("./questions");
+import careerFields from "./careerFields";
+import questions from "./questions";
+import type { AssessmentResult } from "./types";
 
 /**
  * Build a flat lookup map: answerId -> weights object
  * e.g. { "q1_a": { cybersecurity: 5, networking: 2 }, ... }
  */
 function buildAnswerWeightMap() {
-  const map = {};
+  const map:  Record<string, Record<string, number>> = {};
   for (const question of questions) {
     for (const answer of question.answers) {
       map[answer.id] = answer.weights;
@@ -36,7 +37,7 @@ function buildAnswerWeightMap() {
  * but useful for validation).
  */
 function buildAnswerQuestionMap() {
-  const map = {};
+  const map:  Record<string, Record<string, number>> = {};
   for (const question of questions) {
     for (const answer of question.answers) {
       map[answer.id] = question.id;
@@ -164,8 +165,8 @@ function getQuestionsBySection() {
   return sections;
 }
 
-module.exports = {
+export{
   scoreAssessment,
   getQuestion,
-  getQuestionsBySection,
+  getQuestionsBySection
 };

@@ -1,4 +1,4 @@
-
+import type {Questions} from "./types";
 const questions = [
 
   //SECTION 1: DIRECT INTEREST
@@ -452,4 +452,4 @@ const questions = [
 
 ];
 
-module.exports = questions;
+export default questions;
