@@ -1,4 +1,4 @@
-
+import type {CareerField} from "./types";
 const careerFields = [
   {
     id: "cybersecurity",
