@@ -14,15 +14,24 @@
  */
 
 import careerFields from "./careerFields";
+<<<<<<< HEAD
 import questions from "./src/app/assessment/questions";
 import type { AssessmentResult, Questions } from "./types";
+=======
+import questions from "./questions";
+import type { AssessmentResult } from "./types";
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
 
 /**
  * Build a flat lookup map: answerId -> weights object
  * e.g. { "q1_a": { cybersecurity: 5, networking: 2 }, ... }
  */
 function buildAnswerWeightMap() {
+<<<<<<< HEAD
   const map:  Record<string, Record<string, number | undefined>> = {};
+=======
+  const map:  Record<string, Record<string, number>> = {};
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
   for (const question of questions) {
     for (const answer of question.answers) {
       map[answer.id] = answer.weights;
@@ -37,7 +46,11 @@ function buildAnswerWeightMap() {
  * but useful for validation).
  */
 function buildAnswerQuestionMap() {
+<<<<<<< HEAD
   const map:  Record<string, string> = {};
+=======
+  const map:  Record<string, Record<string, number>> = {};
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
   for (const question of questions) {
     for (const answer of question.answers) {
       map[answer.id] = question.id;
@@ -57,7 +70,11 @@ function buildAnswerQuestionMap() {
  *   warnings: string[]
  * }}
  */
+<<<<<<< HEAD
 function scoreAssessment(selectedAnswerIds: string[]) {
+=======
+function scoreAssessment(selectedAnswerIds) {
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
   const answerWeightMap  = buildAnswerWeightMap();
   const answerQuestionMap = buildAnswerQuestionMap();
   const warnings = [];
@@ -82,12 +99,17 @@ function scoreAssessment(selectedAnswerIds: string[]) {
 
   // 2. Accumulate scores
   // Initialize all fields at 0
+<<<<<<< HEAD
   const scores: Record<string, number> = {};
+=======
+  const scores = {};
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
   for (const field of careerFields) {
     scores[field.id] = 0;
   }
 
   for (const answerId of validAnswers) {
+<<<<<<< HEAD
   const weights = answerWeightMap[answerId];
   for (const [fieldId, points] of Object.entries(weights)) {
     if (scores[fieldId] !== undefined && points !== undefined) {
@@ -95,18 +117,35 @@ function scoreAssessment(selectedAnswerIds: string[]) {
     }
   }
 }
+=======
+    const weights = answerWeightMap[answerId];
+    for (const [fieldId, points] of Object.entries(weights)) {
+      if (scores[fieldId] !== undefined) {
+        scores[fieldId] += points;
+      }
+    }
+  }
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
 
   // 3. Calculate max possible score per field (for percentage display)
   // Max possible = if the user always picked the answer with the highest weight
   // toward that field. We use this to normalize scores into a 0–100% scale.
+<<<<<<< HEAD
   const maxPossiblePerField: Record<string, number> = {};
+=======
+  const maxPossiblePerField = {};
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
   for (const field of careerFields) {
     maxPossiblePerField[field.id] = 0;
   }
 
   for (const question of questions) {
     // For each question, find the highest weight each field could have received
+<<<<<<< HEAD
     const bestPerField: Record <string, number> = {};
+=======
+    const bestPerField = {};
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
     for (const answer of question.answers) {
       for (const [fieldId, points] of Object.entries(answer.weights)) {
         if (!bestPerField[fieldId] || points > bestPerField[fieldId]) {
@@ -149,7 +188,11 @@ function scoreAssessment(selectedAnswerIds: string[]) {
 /**
  * Helper: given a question ID, return the full question object.
  */
+<<<<<<< HEAD
 function getQuestion(questionId: string) {
+=======
+function getQuestion(questionId) {
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
   return questions.find((q) => q.id === questionId) || null;
 }
 
@@ -157,7 +200,11 @@ function getQuestion(questionId: string) {
  * Helper: return all questions grouped by section name.
  */
 function getQuestionsBySection() {
+<<<<<<< HEAD
   const sections: Record<string, Questions[]> = {};
+=======
+  const sections = {};
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
   for (const q of questions) {
     if (!sections[q.section]) sections[q.section] = [];
     sections[q.section].push(q);

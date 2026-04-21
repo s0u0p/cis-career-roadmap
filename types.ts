@@ -17,7 +17,10 @@ export type Questions = {
     id: string;
     section: string;
     type: "single_choice" | "multi_select";
+<<<<<<< HEAD
     text: string;
+=======
+>>>>>>> 3a54e718b9f12244b732ab7a62c4b2cdc1620149
     answers: Answer[];
     maxSelections?: number;
 };
