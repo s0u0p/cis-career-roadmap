@@ -68,10 +68,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              Your Career Strategy Roadmap
+              Your CIS Career Roadmap
             </h1>
             <p className="text-lg sm:text-xl max-w-3xl mx-auto mb-8">
-              A comprehensive 6-step guide to help Towson University students 
+              A comprehensive 6-step guide to help Towson University CIS students 
               navigate their career journey with confidence and purpose.
             </p>
             <Link

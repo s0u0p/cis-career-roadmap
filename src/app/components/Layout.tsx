@@ -24,7 +24,7 @@ export default function Layout() {
             <Link to="/" className="flex items-center gap-3">
               <div className="text-black">
                 <h1 className="text-2xl font-bold">Towson University</h1>
-                <p className="text-sm">Career Strategy Guide</p>
+                <p className="text-sm">CIS Career Roadmap</p>
               </div>
             </Link>
 
@@ -107,9 +107,9 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-bold mb-3">Towson University Career Center</h3>
+              <h3 className="font-bold mb-3">Towson University: Department of Computer and Information Science</h3>
               <p className="text-sm text-gray-300">
-                7920 York Road<br />
+                7800 York Road<br />
                 Towson, MD 21252
               </p>
             </div>
