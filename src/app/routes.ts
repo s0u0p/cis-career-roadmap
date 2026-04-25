@@ -18,6 +18,7 @@ export const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: "assessment", Component: AssessmentQuiz },
       {
+        // All pages below require the assessment to be completed first
         Component: RequireAssessment,
         children: [
           { path: "self-assessment", Component: SelfAssessment },

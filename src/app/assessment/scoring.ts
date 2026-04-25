@@ -59,7 +59,7 @@ function buildQuestionTypeMap(): Record<string, Questions["type"]> {
 
 /**
  * Main scoring function.
- *
+ * 
  * @param selectedAnswerIds - Array of answer IDs the user chose
  * @returns AssessmentResult with topThree, allResults, and warnings
  */
@@ -89,7 +89,7 @@ export function scoreAssessment(selectedAnswerIds: string[]): AssessmentResult {
     validAnswers.push(answerId);
   }
 
-  // 2. Accumulate scores — initialize all fields at 0
+  // 2. Accumulate scores - initialize all fields at 0
   const scores: Record<string, number> = {};
   for (const field of careerFields) {
     scores[field.id] = 0;
@@ -134,7 +134,7 @@ export function scoreAssessment(selectedAnswerIds: string[]): AssessmentResult {
       const percentage = maxScore > 0 ? Math.round((rawScore / maxScore) * 100) : 0;
       return { ...field, rawScore, maxScore, percentage };
     })
-    .sort((a, b) => b.rawScore - a.rawScore);
+    .sort((a, b) => b.percentage - a.percentage);
 
   return {
     topThree: allResults.slice(0, 3),
@@ -143,16 +143,15 @@ export function scoreAssessment(selectedAnswerIds: string[]): AssessmentResult {
   };
 }
 
-/**
- * Helper: given a question ID, return the full question object.
- */
+
+//Helper: given a question ID, return the full question object.
+
 export function getQuestion(questionId: string) {
   return questions.find((q) => q.id === questionId) || null;
 }
 
-/**
- * Helper: return all questions grouped by section name.
- */
+//return all questions grouped by section name.
+
 export function getQuestionsBySection(): Record<string, Questions[]> {
   const sections: Record<string, Questions[]> = {};
   for (const q of questions) {

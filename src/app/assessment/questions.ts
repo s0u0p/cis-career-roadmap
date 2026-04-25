@@ -6,7 +6,7 @@ const questions: Questions[] = [
   {
     id: "q1",
     section: "Career Interests",
-    type: "single_choice",
+    type: "multi_select",
     text: "Which area of technology interests you the most?",
     answers: [
       {

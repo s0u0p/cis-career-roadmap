@@ -399,7 +399,6 @@ export default function SkillDevelopment() {
                 <div className="text-xs text-gray-600">Essential across all fields</div>
               </div>
               <div className="bg-white rounded-lg p-3">
-                <div className="font-bold mb-1">3. Emotional Intelligence</div>
                 <div className="text-xs text-gray-600">Top soft skill for leaders</div>
               </div>
             </div>
