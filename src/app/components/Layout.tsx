@@ -116,14 +116,14 @@ export default function Layout() {
             <div>
               <h3 className="font-bold mb-3">Contact</h3>
               <p className="text-sm text-gray-300">
-                Email: careercenter@towson.edu<br />
-                Phone: (410) 704-2233
+                Email: cisadvising@towson.edu<br />
+                Phone: (410) 704-2633
               </p>
             </div>
             <div>
               <h3 className="font-bold mb-3">Hours</h3>
               <p className="text-sm text-gray-300">
-                Monday - Friday: 8:30am - 5:00pm
+                Monday - Friday: 8:00am - 5:00pm
               </p>
             </div>
           </div>
