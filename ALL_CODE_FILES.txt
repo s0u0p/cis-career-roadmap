@@ -1,0 +1,139 @@
+================================
+TOWSON UNIVERSITY CAREER STRATEGY WEBSITE
+COMPLETE CODE WIREFRAME
+================================
+
+This document contains ALL code files in their entirety.
+
+================================
+FILE 1: /src/app/App.tsx
+================================
+
+import { RouterProvider } from "react-router";
+import { router } from "./routes";
+
+export default function App() {
+  return <RouterProvider router={router} />;
+}
+
+================================
+FILE 2: /src/app/routes.ts
+================================
+
+import { createBrowserRouter } from "react-router";
+import Home from "./pages/Home";
+import SelfAssessment from "./pages/SelfAssessment";
+import GoalSetting from "./pages/GoalSetting";
+import ResearchExploration from "./pages/ResearchExploration";
+import SkillDevelopment from "./pages/SkillDevelopment";
+import ActionPlan from "./pages/ActionPlan";
+import AdaptabilityFlexibility from "./pages/AdaptabilityFlexibility";
+import Layout from "./components/Layout";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Layout,
+    children: [
+      { index: true, Component: Home },
+      { path: "self-assessment", Component: SelfAssessment },
+      { path: "goal-setting", Component: GoalSetting },
+      { path: "research-exploration", Component: ResearchExploration },
+      { path: "skill-development", Component: SkillDevelopment },
+      { path: "action-plan", Component: ActionPlan },
+      { path: "adaptability-flexibility", Component: AdaptabilityFlexibility },
+    ],
+  },
+]);
+
+================================
+FILE 3: /src/app/components/Layout.tsx
+================================
+
+See the full file in the codebase - contains:
+- Header with Towson branding (#FFBB00)
+- Responsive navigation (desktop & mobile)
+- Footer with contact info
+- Uses React Router's Outlet for child routes
+
+================================
+FILE 4: /src/app/pages/Home.tsx
+================================
+
+See the full file in the codebase - contains:
+- Hero section with gradient background
+- 6 step cards in a responsive grid
+- Each card links to its detail page
+- CTA section at bottom
+
+================================
+FILES 5-10: Page Components
+================================
+
+All page files follow this structure:
+- Header section with step number and icon
+- Main content area (2/3 width)
+- Sidebar with resources (1/3 width)
+- Navigation footer (Previous/Next buttons)
+
+The last 3 steps have significantly more detailed content:
+- Step 3: Research & Exploration (ResearchExploration.tsx)
+- Step 4: Skill Development (SkillDevelopment.tsx)
+- Step 5: Action Plan (ActionPlan.tsx)
+- Step 6: Adaptability & Flexibility (AdaptabilityFlexibility.tsx)
+
+================================
+KEY FEATURES ACROSS ALL FILES
+================================
+
+1. ROUTING
+   - React Router v7 with data mode pattern
+   - Nested routes under Layout component
+   - Clean URLs (e.g., /research-exploration)
+
+2. RESPONSIVE DESIGN
+   - Mobile-first approach
+   - Grid layouts adapt to screen size
+   - Hamburger menu on mobile
+
+3. NAVIGATION
+   - Persistent header across all pages
+   - Active page highlighting
+   - Previous/Next navigation on each page
+
+4. BRANDING
+   - Towson gold (#FFBB00) as primary color
+   - Black for CTAs and headers
+   - Color-coded steps (blue, green, purple, orange, red, teal)
+
+5. ICONS
+   - lucide-react library
+   - Consistent iconography
+   - Color-matched to themes
+
+6. CONTENT SECTIONS (Enhanced Pages)
+   Each enhanced page (steps 3-6) includes:
+   - Overview section
+   - 4-6 detailed content areas
+   - Actionable checklists
+   - Resource sidebars
+   - Statistics and facts
+   - Examples and frameworks
+
+================================
+TO VIEW COMPLETE CODE
+================================
+
+You can view each individual file using these paths:
+1. /src/app/App.tsx
+2. /src/app/routes.ts
+3. /src/app/components/Layout.tsx
+4. /src/app/pages/Home.tsx
+5. /src/app/pages/SelfAssessment.tsx
+6. /src/app/pages/GoalSetting.tsx
+7. /src/app/pages/ResearchExploration.tsx ⭐ ENHANCED
+8. /src/app/pages/SkillDevelopment.tsx ⭐ ENHANCED
+9. /src/app/pages/ActionPlan.tsx ⭐ ENHANCED
+10. /src/app/pages/AdaptabilityFlexibility.tsx ⭐ ENHANCED
+
+All files are fully functional React/TypeScript components using Tailwind CSS for styling.
