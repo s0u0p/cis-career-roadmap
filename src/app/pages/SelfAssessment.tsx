@@ -11,7 +11,10 @@ import {
 import PercentageRing from "../components/PercentageRing";
 import { useAssessment } from "../context/AssessmentContext";
 
-// O*NET placeholder data, replace with live API calls later
+import { useEffect, useState } from "react";
+import { getOnetOccupation } from "../../onetApi";
+
+
 const onetData: Record<
   string,
   {
@@ -136,7 +139,36 @@ export default function SelfAssessment() {
   const { result, clearResult } = useAssessment();
   const navigate = useNavigate();
 
-  // Not completed yet, prompt to take the assessment
+  const [liveOnetData, setLiveOnetData] = useState<Record<string, any>>({});
+
+  useEffect(() => {
+    if (!result) return;
+  
+    const topThree = result.topThree;
+  
+    async function loadOnetData() {
+      try {
+        const entries = await Promise.all(
+          topThree.map(async (field: any) => {
+            if (!field.onetCode) {
+              console.warn("Missing O*NET code for:", field);
+              return [field.id, null];
+            }
+        
+            const data = await getOnetOccupation(field.onetCode);
+            return [field.id, data];
+          })
+        );
+  
+        setLiveOnetData(Object.fromEntries(entries));
+      } catch (error) {
+        console.error("O*NET API error:", error);
+      }
+    }
+  
+    loadOnetData();
+  }, [result]);
+
   if (!result) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
@@ -176,8 +208,11 @@ export default function SelfAssessment() {
         <div className="lg:col-span-2 space-y-8">
 
           {/* Top 3 Career Matches */}
-          {result.topThree.map((field, i) => {
-            const onet = onetData[field.id];
+          {result.topThree.map((field: any, i) => {
+            const onet = {
+              ...onetData[field.id],
+              ...liveOnetData[field.id],
+            };
             const config = rankConfig[i];
             return (
               <Card key={field.id} className={`border-4 ${config.border} shadow-lg`}>
@@ -264,12 +299,17 @@ export default function SelfAssessment() {
                           O*NET Occupational Data
                         </h4>
                         <span className="text-xs bg-blue-200 text-blue-800 px-2 py-0.5 rounded font-medium">
-                          Placeholder — Live API coming soon
+                          O*NET Career Data
                         </span>
                       </div>
                       <p className="text-sm text-blue-800 font-medium mb-3">
                         {onet.title}
                       </p>
+                      {onet.description && (
+                        <p className="text-sm text-blue-800 mb-3">
+                        {onet.description}
+                        </p>
+                      )}
                       <div className="grid grid-cols-3 gap-3 mb-4">
                         <div className="bg-white rounded-lg p-3 text-center">
                           <div className="text-base font-bold text-blue-700">
@@ -297,7 +337,7 @@ export default function SelfAssessment() {
                         </div>
                       </div>
                       <a
-                        href={`https://www.onetonline.org/link/summary/${onet.code}`}
+                        href={`https://www.onetonline.org/link/summary/${onet.code?.replace('.', '')}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-blue-700 font-medium hover:underline flex items-center gap-1"
