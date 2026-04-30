@@ -218,7 +218,7 @@ export default function AssessmentQuiz() {
 
           {/* Sidebar */}
           <div>
-            <div className="bg-[#FFBB00] rounded-lg p-6">
+            <div className="bg-[#FFBB00] rounded-xl p-6">
               <h3 className="font-bold text-xl mb-4">What to Expect</h3>
               <ul className="space-y-3">
                 {[
@@ -251,7 +251,7 @@ export default function AssessmentQuiz() {
     );
   }
 
-  // QUIZ SCREEN
+  // ── QUIZ SCREEN ──────────────────────────────────────────────────────────────
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -272,7 +272,7 @@ export default function AssessmentQuiz() {
       </div>
 
       {/* Progress Bar */}
-      <div className="bg-white border-b-2 border-[#FFBB00] shadow-sm rounded-lg mb-8 p-6">
+      <div className="bg-white border-b-2 border-[#FFBB00] shadow-sm rounded-xl mb-8 p-6">
         <div className="space-y-2">
           <div className="flex justify-between text-sm font-medium text-gray-700">
             <span>Question {currentQuestion + 1} of {questions.length}</span>
@@ -400,7 +400,7 @@ export default function AssessmentQuiz() {
 
         {/* Sidebar Progress Tracker */}
         <div>
-          <div className="bg-[#FFBB00] rounded-lg p-6">
+          <div className="bg-[#FFBB00] rounded-xl p-6">
             <h3 className="font-bold text-xl mb-4">Your Progress</h3>
             <div className="space-y-2">
               {questions.map((q, i) => {

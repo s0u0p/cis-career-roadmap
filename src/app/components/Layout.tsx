@@ -128,7 +128,7 @@ export default function Layout() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
-            © 2026 Towson University. All rights reserved.
+            
           </div>
         </div>
       </footer>
