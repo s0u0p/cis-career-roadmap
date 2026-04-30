@@ -5,7 +5,7 @@ const questions: Questions[] = [
 
   {
     id: "q1",
-    section: "Career Interests",
+    section: "Career Interests - Part 1",
     type: "multi_select",
     text: "Which area of technology interests you the most?",
     answers: [
@@ -44,7 +44,7 @@ const questions: Questions[] = [
 
   {
     id: "q2",
-    section: "Career Interests",
+    section: "Career Interests - Part 2",
     type: "single_choice",
     text: "Which of the following tasks sounds most exciting to you?",
     answers: [
@@ -85,7 +85,7 @@ const questions: Questions[] = [
 
   {
     id: "q3",
-    section: "Skills & Strengths",
+    section: "Skills",
     type: "single_choice",
     text: "Which skill do you feel most confident in — or most excited to develop?",
     answers: [
@@ -124,7 +124,7 @@ const questions: Questions[] = [
 
   {
     id: "q4",
-    section: "Skills & Strengths",
+    section: "Strengths",
     type: "single_choice",
     text: "In school or personal projects, which type of work have you found most natural?",
     answers: [
@@ -165,7 +165,7 @@ const questions: Questions[] = [
 
   {
     id: "q5",
-    section: "Work Style & Values",
+    section: "Work Style & Values - Part 1",
     type: "single_choice",
     text: "What kind of work environment appeals to you most?",
     answers: [
@@ -204,7 +204,7 @@ const questions: Questions[] = [
 
   {
     id: "q6",
-    section: "Work Style & Values",
+    section: "Work Style & Values - Part 2",
     type: "single_choice",
     text: "What matters most to you in your future career?",
     answers: [
@@ -245,7 +245,7 @@ const questions: Questions[] = [
 
   {
     id: "q7",
-    section: "Scenarios",
+    section: "Scenarios - Part 1",
     type: "single_choice",
     text: "Your team just launched a new web app. Which part of the process would you have enjoyed most?",
     answers: [
@@ -284,7 +284,7 @@ const questions: Questions[] = [
 
   {
     id: "q8",
-    section: "Scenarios",
+    section: "Scenarios - Part 2",
     type: "single_choice",
     text: "A company's system goes down at 2am. What role would you want to be in?",
     answers: [
@@ -325,7 +325,7 @@ const questions: Questions[] = [
 
   {
     id: "q9",
-    section: "Experience & Background",
+    section: "Experience & Background - Part 1",
     type: "single_choice",
     text: "Which best describes your experience so far?",
     answers: [
@@ -364,7 +364,7 @@ const questions: Questions[] = [
 
   {
     id: "q10",
-    section: "Experience & Background",
+    section: "Experience & Background - Part 2",
     type: "single_choice",
     text: "Which course or subject have you found most engaging so far?",
     answers: [
@@ -403,7 +403,7 @@ const questions: Questions[] = [
 
   {
     id: "q11",
-    section: "Experience & Background",
+    section: "Experience & Background - Part 3",
     type: "multi_select",
     text: "Which of these tools have you used before? Choose up to 5 that apply.",
     answers: [

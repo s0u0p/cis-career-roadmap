@@ -286,8 +286,8 @@ export default function AssessmentQuiz() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Question Card */}
         <div className="lg:col-span-2">
-          <Card className="border-2 border-black shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-[#FFBB00] to-yellow-300">
+          <Card className="border-2 border-black shadow-lg overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-[#FFBB00] to-[#FFBB00] overflow-hidden">
               <CardTitle className="text-2xl sm:text-3xl text-black">
                 {current.text}
               </CardTitle>
@@ -306,14 +306,11 @@ export default function AssessmentQuiz() {
                       (answers[currentQuestion] as string[]) || []
                     ).includes(answer.id);
                     const atMax =
-                      ((answers[currentQuestion] as string[]) || []).length >=
-                      maxSelections;
+                      ((answers[currentQuestion] as string[]) || []).length >= maxSelections;
                     return (
                       <div
                         key={answer.id}
-                        onClick={() =>
-                          (!atMax || selected) && handleMultiAnswer(answer.id)
-                        }
+                        onClick={() => (!atMax || selected) && handleMultiAnswer(answer.id)}
                         className={`flex items-center space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer ${
                           selected
                             ? "border-[#FFBB00] bg-yellow-50"
@@ -329,10 +326,11 @@ export default function AssessmentQuiz() {
                           onCheckedChange={() =>
                             (!atMax || selected) && handleMultiAnswer(answer.id)
                           }
+                          onClick={(e) => e.stopPropagation()}  // ← add this
                         />
                         <Label
                           htmlFor={answer.id}
-                          className="flex-1 text-base cursor-pointer leading-relaxed"
+                          className="flex-1 text-base cursor-pointer leading-relaxed pointer-events-none"  // ← add pointer-events-none
                         >
                           {answer.text}
                         </Label>

@@ -378,11 +378,11 @@ export default function AdaptabilityFlexibility() {
             <h3 className="font-bold text-xl mb-4">Recommended Reading</h3>
             <ul className="space-y-3 text-sm">
               <li className="pb-3 border-b border-gray-200">
-                <p className="font-medium mb-1">"Mindset" by Carol Dweck</p>
-                <p className="text-xs text-gray-600">The power of growth mindset</p>
+                <p className="font-medium mb-1">"Mindset: The New Psychology of Success"</p>
+                <p className="text-xs text-gray-600">by Carol Dweck</p>
               </li>
               <li className="pb-3 border-b border-gray-200">
-                <p className="font-medium mb-1">"Who Moved My Cheese?"</p>
+                <p className="font-medium mb-1">"The 7 Habits of Highly Effective People"</p>
                 <p className="text-xs text-gray-600">by Spencer Johnson</p>
               </li>
               <li>

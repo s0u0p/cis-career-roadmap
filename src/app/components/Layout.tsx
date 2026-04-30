@@ -49,18 +49,22 @@ export default function Layout() {
                 Home
               </Link>
               {steps.map((step) => (
-                <Link
-                  key={step.number}
-                  to={step.path}
-                  className={`px-3 py-2 rounded-md text-sm transition-colors ${
-                    location.pathname === step.path
-                      ? "bg-black text-white"
-                      : "text-black hover:bg-yellow-300"
-                  }`}
-                >
-                  Step {step.number}
-                </Link>
-              ))}
+  <Link
+    key={step.number}
+    to={step.path}
+    className={`relative group px-3 py-2 rounded-md text-sm transition-colors ${
+      location.pathname === step.path
+        ? "bg-black text-white"
+        : "text-black hover:bg-yellow-300"
+    }`}
+  >
+    Step {step.number}
+    {/* Custom tooltip */}
+    <span className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+      Step {step.number}: {step.title}
+    </span>
+  </Link>
+))}
             </nav>
           </div>
 
