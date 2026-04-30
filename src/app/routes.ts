@@ -7,6 +7,10 @@ import ResearchExploration from "./pages/ResearchExploration";
 import SkillDevelopment from "./pages/SkillDevelopment";
 import ActionPlan from "./pages/ActionPlan";
 import AdaptabilityFlexibility from "./pages/AdaptabilityFlexibility";
+<<<<<<< HEAD
+=======
+import Report from "./pages/report.tsx";
+>>>>>>> Rebecca-pdf-feature
 import Layout from "./components/Layout";
 import RequireAssessment from "./components/RequireAssessment";
 
@@ -27,6 +31,10 @@ export const router = createBrowserRouter([
           { path: "skill-development", Component: SkillDevelopment },
           { path: "action-plan", Component: ActionPlan },
           { path: "adaptability-flexibility", Component: AdaptabilityFlexibility },
+<<<<<<< HEAD
+=======
+          { path: "report", Component: Report },
+>>>>>>> Rebecca-pdf-feature
         ],
       },
     ],
