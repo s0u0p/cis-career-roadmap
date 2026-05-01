@@ -18,7 +18,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-[#FFBB00] border-b border-gray-200">
+      <header className="bg-[#FFBB00] border-b border-black-200 shadow-background-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link to="/" className="flex items-center gap-3">
@@ -111,7 +111,7 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-bold mb-3">Towson University: Department of Computer and Information Science</h3>
+              <h3 className="font-bold mb-3">Towson University: Department of Computer and Information Sciences</h3>
               <p className="text-sm text-gray-300">
                 7800 York Road<br />
                 Towson, MD 21252
