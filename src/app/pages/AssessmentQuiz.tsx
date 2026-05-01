@@ -39,7 +39,11 @@ export default function AssessmentQuiz() {
   const [answers, setAnswers] = useState<Answers>({});
 
   // Already completed - redirect to results
+<<<<<<< HEAD
   if (isComplete) return <Navigate to="/self-assessment" replace />;
+=======
+  if (isComplete) return <Navigate to="/report" replace />;
+>>>>>>> Rebecca-pdf-feature
 
   const current = questions[currentQuestion];
   const isMultiSelect = current?.type === "multi_select";
@@ -51,7 +55,11 @@ export default function AssessmentQuiz() {
     ? Array.isArray(currentAnswer) && (currentAnswer as string[]).length > 0
     : currentAnswer !== undefined;
 
+<<<<<<< HEAD
   // Intro screen handlers
+=======
+  // ── Intro screen handlers
+>>>>>>> Rebecca-pdf-feature
 
   const handleStartQuiz = () => {
     let valid = true;
@@ -73,7 +81,11 @@ export default function AssessmentQuiz() {
     setStep("quiz");
   };
 
+<<<<<<< HEAD
   // Quiz handlers
+=======
+  // ── Quiz handlers
+>>>>>>> Rebecca-pdf-feature
 
   const handleSingleAnswer = (value: string) => {
     setAnswers({ ...answers, [currentQuestion]: value });
@@ -93,6 +105,10 @@ export default function AssessmentQuiz() {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
+<<<<<<< HEAD
+=======
+      // ── Collect all selected answer IDs
+>>>>>>> Rebecca-pdf-feature
       const answerIds: string[] = [];
       questions.forEach((_, i) => {
         const a = answers[i];
@@ -100,9 +116,24 @@ export default function AssessmentQuiz() {
           Array.isArray(a) ? answerIds.push(...a) : answerIds.push(a);
         }
       });
+<<<<<<< HEAD
       const scored = scoreAssessment(answerIds);
       setResult(scored);
       navigate("/self-assessment");
+=======
+
+      // ── Score the assessment
+      const scored = scoreAssessment(answerIds);
+      setResult(scored);
+
+      // ── Save to localStorage so the report page can read them
+      localStorage.setItem("assessmentAnswers", JSON.stringify(answerIds));
+      localStorage.setItem("studentName", name.trim());
+      localStorage.setItem("studentMajor", major);
+
+      // ── Go to report page instead of self-assessment
+      navigate("/report");
+>>>>>>> Rebecca-pdf-feature
     }
   };
 
@@ -110,7 +141,11 @@ export default function AssessmentQuiz() {
     if (currentQuestion > 0) setCurrentQuestion(currentQuestion - 1);
   };
 
+<<<<<<< HEAD
   // Intro Screen
+=======
+  // ── INTRO SCREEN ─────────────────────────────────────────────────────────────
+>>>>>>> Rebecca-pdf-feature
 
   if (step === "intro") {
     return (
