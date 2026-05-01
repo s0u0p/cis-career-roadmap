@@ -23,7 +23,7 @@ export default function GoalSetting() {
       {/* Content */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-4">Why Set Career Goals?</h2>
             <p className="text-gray-600 mb-4">
               Clear goals provide direction, motivation, and a framework for measuring 
@@ -32,7 +32,7 @@ export default function GoalSetting() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-4">SMART Goal Framework</h2>
             <div className="space-y-4">
               <div className="flex gap-4">
@@ -83,7 +83,7 @@ export default function GoalSetting() {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-4">Types of Career Goals</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="border-2 border-green-200 rounded-lg p-4 text-center">
@@ -107,7 +107,7 @@ export default function GoalSetting() {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <div className="bg-[#FFBB00] rounded-xl p-6">
+          <div className="bg-[#FFBB00] rounded-lg p-6">
             <h3 className="font-bold text-xl mb-4">Tools</h3>
             <ul className="space-y-3">
               <li>

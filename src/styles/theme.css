@@ -126,12 +126,8 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Proxima Nova', sans-serif;  /* ← add this */
   }
-
-  /**
-  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
-  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
-  */
 
   html {
     font-size: var(--font-size);
@@ -141,41 +137,48 @@
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Kandal', 'Proxima Nova', sans-serif;  /* ← add this */
   }
 
   h2 {
     font-size: var(--text-xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Kandal', 'Proxima Nova', sans-serif;  /* ← add this */
   }
 
   h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Kandal', 'Proxima Nova', sans-serif;  /* ← add this */
   }
 
   h4 {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Kandal', 'Proxima Nova', sans-serif;  /* ← add this */
   }
 
   label {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Proxima Nova', sans-serif;  /* ← add this */
   }
 
   button {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: 'Proxima Nova', sans-serif;  /* ← add this */
   }
 
   input {
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+    font-family: 'Proxima Nova', sans-serif;  /* ← add this */
   }
 }

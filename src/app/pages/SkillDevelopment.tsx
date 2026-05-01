@@ -37,7 +37,7 @@ export default function SkillDevelopment() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         <div className="lg:col-span-2 space-y-6">
           {/* Overview */}
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-4">Building Your Competitive Edge</h2>
             <p className="text-gray-600 mb-4">
               In today's dynamic job market, continuous skill development is essential.
@@ -54,7 +54,7 @@ export default function SkillDevelopment() {
           </div>
 
           {/* Skill Gap Analysis */}
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-4">Conduct a Skill Gap Analysis</h2>
             <p className="text-gray-600 mb-6">
               Identify the difference between your current skills and those required for your target career:
@@ -85,7 +85,7 @@ export default function SkillDevelopment() {
           </div>
 
           {/* Skill Categories */}
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-6">Essential Skill Categories</h2>
             <div className="space-y-6">
               {/* Technical Skills */}
@@ -255,7 +255,7 @@ export default function SkillDevelopment() {
           </div>
 
           {/* Development Strategies */}
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-6">Skill Development Strategies</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
@@ -335,7 +335,7 @@ export default function SkillDevelopment() {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <div className="bg-[#FFBB00] rounded-xl p-6">
+          <div className="bg-[#FFBB00] rounded-lg p-6">
             <h3 className="font-bold text-xl mb-4">Learning Resources</h3>
             <ul className="space-y-3">
               <li>
@@ -366,7 +366,7 @@ export default function SkillDevelopment() {
             </ul>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-6">
+          <div className="bg-white rounded-lg shadow-md p-6">
             <h3 className="font-bold text-xl mb-4">Skill Assessment Tools</h3>
             <p className="text-sm text-gray-600 mb-4">
               Use these tools to identify and track your skill development:
@@ -387,7 +387,7 @@ export default function SkillDevelopment() {
             </ul>
           </div>
 
-          <div className="bg-orange-100 rounded-xl p-6">
+          <div className="bg-orange-100 rounded-lg p-6">
             <h3 className="font-bold text-xl mb-4">Top Skills in Demand</h3>
             <div className="space-y-3">
               <div className="bg-white rounded-lg p-3">

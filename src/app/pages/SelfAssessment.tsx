@@ -258,7 +258,7 @@ export default function SelfAssessment() {
 
                   {/* O*NET Placeholder */}
                   {onet && (
-                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-5">
                       <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
                         <h4 className="font-bold text-blue-900 text-sm">
                           O*NET Occupational Data
@@ -313,7 +313,7 @@ export default function SelfAssessment() {
           })}
 
           {/* All Career Matches Dropdown */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-200">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200">
             <Accordion type="single" collapsible>
               <AccordionItem value="all" className="border-none">
                 <AccordionTrigger className="px-6 py-5 hover:no-underline">
@@ -329,7 +329,7 @@ export default function SelfAssessment() {
                     {result.allResults.map((field, i) => (
                       <div
                         key={field.id}
-                        className={`flex items-center gap-4 p-4 rounded-xl border-2 ${
+                        className={`flex items-center gap-4 p-4 rounded-lg border-2 ${
                           i === 0
                             ? "border-yellow-400 bg-yellow-50"
                             : i === 1
@@ -372,7 +372,7 @@ export default function SelfAssessment() {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <div className="bg-[#FFBB00] rounded-xl p-6">
+          <div className="bg-[#FFBB00] rounded-lg p-6">
             <h3 className="font-bold text-xl mb-4">What's Next?</h3>
             <ul className="space-y-3">
               {[
@@ -392,7 +392,7 @@ export default function SelfAssessment() {
             </ul>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-6 border-2 border-gray-200">
+          <div className="bg-white rounded-lg shadow-md p-6 border-2 border-gray-200">
             <h3 className="font-bold text-lg mb-2">Download Your Roadmap</h3>
             <p className="text-sm text-gray-600 mb-4">
               Save a personalized PDF of your results.
@@ -404,7 +404,7 @@ export default function SelfAssessment() {
             <p className="text-xs text-gray-400 mt-2 text-center">Coming soon</p>
           </div>
 
-          <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
             <h3 className="font-bold text-lg mb-2">Retake Assessment</h3>
             <p className="text-sm text-gray-600 mb-4">
               Want to try different answers?

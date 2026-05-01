@@ -35,7 +35,7 @@ export default function ResearchExploration() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         <div className="lg:col-span-2 space-y-6">
           {/* Overview */}
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-4">Why Research Matters</h2>
             <p className="text-gray-600 mb-4">
               Thorough research helps you make informed decisions about your career path. 
@@ -51,7 +51,7 @@ export default function ResearchExploration() {
           </div>
 
           {/* Research Areas */}
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-6">Key Research Areas</h2>
             <div className="space-y-6">
               {/* Career Fields */}
@@ -190,7 +190,7 @@ export default function ResearchExploration() {
           </div>
 
           {/* Research Methods */}
-          <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-6">Effective Research Methods</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-gray-50 rounded-lg p-4">
@@ -228,7 +228,7 @@ export default function ResearchExploration() {
 
         {/* Sidebar */}
         <div className="space-y-6">
-          <div className="bg-[#FFBB00] rounded-xl p-6">
+          <div className="bg-[#FFBB00] rounded-lg p-6">
             <h3 className="font-bold text-xl mb-4">Research Tools</h3>
             <ul className="space-y-3">
               <li>
@@ -259,7 +259,7 @@ export default function ResearchExploration() {
             </ul>
           </div>
 
-          <div className="bg-purple-100 rounded-xl p-6">
+          <div className="bg-purple-100 rounded-lg p-6">
             <h3 className="font-bold text-xl mb-4">Quick Stats</h3>
             <div className="space-y-4">
               <div>

@@ -54,7 +54,7 @@ export default function PercentageRing({
         dominantBaseline="middle"
         fontSize={size * 0.2}
         fontWeight="700"
-        fill="#111827"
+        fill="#FFFFFF"
       >
         {percentage}%
       </text>
