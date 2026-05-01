@@ -53,14 +53,14 @@ export function generatePDF(data: PDFReportData): void {
   doc.setFont(PN, "bold");
   doc.setFontSize(14);
   doc.setTextColor(59, 59, 57);
-  doc.text("Department of Computer", 235, 40, {align: "center"});
-  doc.text("& Information Sciences", 235, 56, {align: "center"});
+  doc.text("Department of Computer", 235, 48, {align: "center"});
+  doc.text("& Information Sciences", 235, 64, {align: "center"});
 
   // Form title - right aligned, bold
   doc.setFont(PN, "bold");
   doc.setFontSize(14);
   doc.setTextColor(59, 59, 57);
-  doc.text("Student Information Report", W - M, 48, { align: "right" });
+  doc.text("Student Information Report", W - M, 56, { align: "right" });
 }
   }
 

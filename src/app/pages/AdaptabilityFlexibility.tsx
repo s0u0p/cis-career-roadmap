@@ -419,7 +419,7 @@ export default function AdaptabilityFlexibility() {
           Your Career Journey Starts Now
         </h2>
         <p className="text-lg text-teal-100 mb-8 max-w-2xl mx-auto">
-          You've completed all six steps of the Towson CIS Career Roadmap. 
+          🎊 Congratulations! You've completed all six steps of the Towson CIS Career Roadmap. 
           Remember: career development is not linear, it's an ongoing process of 
           growth, adaptation, and discovery.
         </p>

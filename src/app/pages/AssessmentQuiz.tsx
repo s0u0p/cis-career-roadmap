@@ -14,7 +14,6 @@ import { useAssessment } from "../context/AssessmentContext";
 
 type Answers = Record<number, string | string[]>;
 
-// CIS majors at Towson University
 const CIS_MAJORS = [
   "Computer Science",
   "Information Systems",
@@ -28,22 +27,15 @@ export default function AssessmentQuiz() {
   const navigate = useNavigate();
   const { setResult, setStudentInfo, isComplete } = useAssessment();
 
-  // Step 0 = intro/name/major screen, Step 1+ = questions
   const [step, setStep] = useState<"intro" | "quiz">("intro");
   const [name, setName] = useState("");
   const [major, setMajor] = useState("");
   const [nameError, setNameError] = useState("");
   const [majorError, setMajorError] = useState("");
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
 
-  // Already completed - redirect to results
-<<<<<<< HEAD
-  if (isComplete) return <Navigate to="/self-assessment" replace />;
-=======
   if (isComplete) return <Navigate to="/report" replace />;
->>>>>>> Rebecca-pdf-feature
 
   const current = questions[currentQuestion];
   const isMultiSelect = current?.type === "multi_select";
@@ -54,12 +46,6 @@ export default function AssessmentQuiz() {
   const isAnswered = isMultiSelect
     ? Array.isArray(currentAnswer) && (currentAnswer as string[]).length > 0
     : currentAnswer !== undefined;
-
-<<<<<<< HEAD
-  // Intro screen handlers
-=======
-  // ── Intro screen handlers
->>>>>>> Rebecca-pdf-feature
 
   const handleStartQuiz = () => {
     let valid = true;
@@ -81,12 +67,6 @@ export default function AssessmentQuiz() {
     setStep("quiz");
   };
 
-<<<<<<< HEAD
-  // Quiz handlers
-=======
-  // ── Quiz handlers
->>>>>>> Rebecca-pdf-feature
-
   const handleSingleAnswer = (value: string) => {
     setAnswers({ ...answers, [currentQuestion]: value });
   };
@@ -105,10 +85,6 @@ export default function AssessmentQuiz() {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-<<<<<<< HEAD
-=======
-      // ── Collect all selected answer IDs
->>>>>>> Rebecca-pdf-feature
       const answerIds: string[] = [];
       questions.forEach((_, i) => {
         const a = answers[i];
@@ -116,24 +92,15 @@ export default function AssessmentQuiz() {
           Array.isArray(a) ? answerIds.push(...a) : answerIds.push(a);
         }
       });
-<<<<<<< HEAD
-      const scored = scoreAssessment(answerIds);
-      setResult(scored);
-      navigate("/self-assessment");
-=======
 
-      // ── Score the assessment
       const scored = scoreAssessment(answerIds);
       setResult(scored);
 
-      // ── Save to localStorage so the report page can read them
       localStorage.setItem("assessmentAnswers", JSON.stringify(answerIds));
       localStorage.setItem("studentName", name.trim());
       localStorage.setItem("studentMajor", major);
 
-      // ── Go to report page instead of self-assessment
       navigate("/report");
->>>>>>> Rebecca-pdf-feature
     }
   };
 
@@ -141,16 +108,9 @@ export default function AssessmentQuiz() {
     if (currentQuestion > 0) setCurrentQuestion(currentQuestion - 1);
   };
 
-<<<<<<< HEAD
-  // Intro Screen
-=======
-  // ── INTRO SCREEN ─────────────────────────────────────────────────────────────
->>>>>>> Rebecca-pdf-feature
-
   if (step === "intro") {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <div className="bg-blue-100 text-blue-600 p-3 rounded-lg">
@@ -179,7 +139,6 @@ export default function AssessmentQuiz() {
                 </p>
               </CardHeader>
               <CardContent className="pt-8 space-y-6">
-                {/* Name field */}
                 <div className="space-y-2">
                   <Label htmlFor="student-name" className="text-base font-semibold">
                     Full Name
@@ -200,7 +159,6 @@ export default function AssessmentQuiz() {
                   )}
                 </div>
 
-                {/* Major dropdown */}
                 <div className="space-y-2">
                   <Label className="text-base font-semibold">
                     Current Major / Program
@@ -251,14 +209,13 @@ export default function AssessmentQuiz() {
             </Card>
           </div>
 
-          {/* Sidebar */}
           <div>
             <div className="bg-[#FFBB00] rounded-xl p-6">
               <h3 className="font-bold text-xl mb-4">What to Expect</h3>
               <ul className="space-y-3">
                 {[
                   "11 questions across 5 sections",
-                  "Takes about 5–7 minutes",
+                  "Takes about 5-7 minutes",
                   "Your top 3 career matches",
                   "Salary and growth data from O*NET",
                   "Downloadable career roadmap PDF",
@@ -274,7 +231,7 @@ export default function AssessmentQuiz() {
               </ul>
               <div className="mt-4 bg-white rounded-lg p-3">
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  🔒 <strong>Privacy note:</strong> Your name and major are only
+                  ?? <strong>Privacy note:</strong> Your name and major are only
                   used to personalize your PDF. They are never saved to a
                   database and disappear when you close this tab.
                 </p>
@@ -286,11 +243,8 @@ export default function AssessmentQuiz() {
     );
   }
 
-  // ── QUIZ SCREEN ──────────────────────────────────────────────────────────────
-
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header */}
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
           <div className="bg-blue-100 text-blue-600 p-3 rounded-lg">
@@ -306,7 +260,6 @@ export default function AssessmentQuiz() {
         </p>
       </div>
 
-      {/* Progress Bar */}
       <div className="bg-white border-b-2 border-[#FFBB00] shadow-sm rounded-xl mb-8 p-6">
         <div className="space-y-2">
           <div className="flex justify-between text-sm font-medium text-gray-700">
@@ -319,7 +272,6 @@ export default function AssessmentQuiz() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Question Card */}
         <div className="lg:col-span-2">
           <Card className="border-2 border-black shadow-lg overflow-hidden">
             <CardHeader className="bg-gradient-to-r from-[#FFBB00] to-[#FFBB00] overflow-hidden">
@@ -328,7 +280,7 @@ export default function AssessmentQuiz() {
               </CardTitle>
               {isMultiSelect && (
                 <p className="text-sm text-black/70 mt-1">
-                  Select up to {maxSelections} ·{" "}
+                  Select up to {maxSelections} �{" "}
                   {((answers[currentQuestion] as string[]) || []).length} selected
                 </p>
               )}
@@ -361,11 +313,11 @@ export default function AssessmentQuiz() {
                           onCheckedChange={() =>
                             (!atMax || selected) && handleMultiAnswer(answer.id)
                           }
-                          onClick={(e) => e.stopPropagation()}  // ← add this
+                          onClick={(e) => e.stopPropagation()}
                         />
                         <Label
                           htmlFor={answer.id}
-                          className="flex-1 text-base cursor-pointer leading-relaxed pointer-events-none"  // ← add pointer-events-none
+                          className="flex-1 text-base cursor-pointer leading-relaxed pointer-events-none"
                         >
                           {answer.text}
                         </Label>
@@ -393,10 +345,11 @@ export default function AssessmentQuiz() {
                         value={answer.id}
                         id={answer.id}
                         className="mt-1"
+                        onClick={(e) => e.stopPropagation()}
                       />
                       <Label
                         htmlFor={answer.id}
-                        className="flex-1 text-base cursor-pointer leading-relaxed"
+                        className="flex-1 text-base cursor-pointer leading-relaxed pointer-events-none"
                       >
                         {answer.text}
                       </Label>
@@ -407,7 +360,6 @@ export default function AssessmentQuiz() {
             </CardContent>
           </Card>
 
-          {/* Navigation Buttons */}
           <div className="flex justify-between items-center mt-8">
             <Button
               onClick={handlePrevious}
@@ -431,7 +383,6 @@ export default function AssessmentQuiz() {
           </div>
         </div>
 
-        {/* Sidebar Progress Tracker */}
         <div>
           <div className="bg-[#FFBB00] rounded-xl p-6">
             <h3 className="font-bold text-xl mb-4">Your Progress</h3>
@@ -460,7 +411,7 @@ export default function AssessmentQuiz() {
                           : "bg-gray-200 text-gray-600"
                       }`}
                     >
-                      {i < currentQuestion && answered ? "✓" : i + 1}
+                      {i < currentQuestion && answered ? "?" : i + 1}
                     </div>
                     <span className="truncate">{q.section}</span>
                   </div>

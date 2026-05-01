@@ -210,7 +210,7 @@ export default function Report() {
         <div className="bg-white rounded-xl shadow-md p-6">
           <h2 className="text-xl font-bold mb-1">Personal Summary</h2>
           <p className="text-gray-500 text-sm mb-4">
-            Optional — add a note about your goals or strengths to include in the PDF.
+            Optional: add a note about your goals or strengths to include in the PDF.
           </p>
           <textarea
             value={summary}

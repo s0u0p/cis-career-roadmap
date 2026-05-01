@@ -87,7 +87,7 @@ const questions: Questions[] = [
     id: "q3",
     section: "Skills",
     type: "single_choice",
-    text: "Which skill do you feel most confident in — or most excited to develop?",
+    text: "Which skill do you feel most confident in, or most excited to develop?",
     answers: [
       {
         id: "q3_a",
@@ -130,32 +130,32 @@ const questions: Questions[] = [
     answers: [
       {
         id: "q4_a",
-        text: "Math-heavy work — statistics, algorithms, or logic",
+        text: "Math-heavy work:  statistics, algorithms, or logic",
         weights: { data_science: 5, ai_ml: 5, software_engineering: 2 },
       },
       {
         id: "q4_b",
-        text: "Creative work — design, layout, or storytelling",
+        text: "Creative work: design, layout, or storytelling",
         weights: { ux_ui_design: 5, web_development: 3 },
       },
       {
         id: "q4_c",
-        text: "Hands-on technical work — configuring, installing, fixing",
+        text: "Hands-on technical work: configuring, installing, fixing",
         weights: { it_support: 5, networking: 4, cloud_computing: 2 },
       },
       {
         id: "q4_d",
-        text: "Strategic work — planning, requirements, process improvement",
+        text: "Strategic work: planning, requirements, process improvement",
         weights: { it_project_management: 5, information_systems: 4 },
       },
       {
         id: "q4_e",
-        text: "Security-minded work — finding flaws, assessing risk",
+        text: "Security-minded work: finding flaws, assessing risk",
         weights: { cybersecurity: 5, networking: 2 },
       },
       {
         id: "q4_f",
-        text: "Building things — writing features, APIs, or services",
+        text: "Building things: writing features, APIs, or services",
         weights: { software_engineering: 5, web_development: 4, cloud_computing: 2 },
       },
     ],
