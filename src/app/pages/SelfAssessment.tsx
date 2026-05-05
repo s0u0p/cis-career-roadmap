@@ -29,7 +29,7 @@ const onetData: Record<
     code: "15-1212.00",
     title: "Information Security Analysts",
     brightOutlook: true,
-    medianSalary: "$112,000",
+    medianSalary: "$124,000",
     growth: "+35%",
   },
   data_science: {
@@ -337,7 +337,7 @@ export default function SelfAssessment() {
                         </div>
                       </div>
                       <a
-                        href={`https://www.onetonline.org/link/summary/${onet.code?.replace('.', '')}`}
+                        href={`https://www.onetonline.org/link/summary/${onet.code}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-blue-700 font-medium hover:underline flex items-center gap-1"
