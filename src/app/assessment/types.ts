@@ -1,6 +1,7 @@
 export type CareerField = {
   id: string;
   label: string;
+  onetCode: string;
   description: string;
   skills: string[];
   exampleRoles: string[];

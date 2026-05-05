@@ -3,6 +3,7 @@ const careerFields: CareerField[] = [
   {
     id: "cybersecurity",
     label: "Cybersecurity",
+    onetCode: "15-1212.00",
     description:
       "Protect systems, networks, and data from digital attacks. Roles include penetration tester, security analyst, incident responder, and security engineer.",
     skills: ["Network security", "Ethical hacking", "Risk assessment", "Cryptography", "Compliance"],
@@ -12,6 +13,7 @@ const careerFields: CareerField[] = [
   {
     id: "data_science",
     label: "Data Science & Analytics",
+    onetCode: "15-2051.00",
     description:
       "Extract insights from large datasets using statistics, machine learning, and visualization. Roles span data analyst, data scientist, and ML engineer.",
     skills: ["Python/R", "Machine learning", "Statistical analysis", "Data visualization", "SQL"],
@@ -21,6 +23,7 @@ const careerFields: CareerField[] = [
   {
     id: "software_engineering",
     label: "Software Engineering",
+    onetCode: "15-1252.00",
     description:
       "Design, build, and maintain software applications. Involves writing clean code, system architecture, and working in agile teams.",
     skills: ["Obect-Oriented Programming", "Algorithms & data structures", "Version control", "Testing", "System design"],
@@ -30,6 +33,7 @@ const careerFields: CareerField[] = [
   {
     id: "web_development",
     label: "Web Development",
+    onetCode: "15-1254.00",
     description:
       "Build and maintain websites and web applications. Covers front-end (UI/UX), back-end (servers/databases), and full-stack development.",
     skills: ["HTML/CSS/JS", "React/Vue/Angular", "Node.js", "REST APIs", "Responsive design"],
@@ -39,6 +43,7 @@ const careerFields: CareerField[] = [
   {
     id: "cloud_computing",
     label: "Cloud Computing & DevOps",
+    onetCode: "15-1241.00",
     description:
       "Deploy, manage, and scale applications using cloud platforms like AWS, Azure, and GCP. Includes DevOps practices like CI/CD and infrastructure as code.",
     skills: ["AWS/Azure/GCP", "Docker/Kubernetes", "CI/CD pipelines", "Linux", "Terraform"],
@@ -48,6 +53,7 @@ const careerFields: CareerField[] = [
   {
     id: "networking",
     label: "Networking & Systems Administration",
+    onetCode: "15-1244.00",
     description:
       "Design, implement, and manage computer networks and IT infrastructure. Keeps organizational systems running reliably and securely.",
     skills: ["TCP/IP", "Routing & switching", "Firewalls", "VPN", "Network monitoring", "Network Traffic Management"],
@@ -57,6 +63,7 @@ const careerFields: CareerField[] = [
   {
     id: "database_admin",
     label: "Database Administration & Engineering",
+    onetCode: "15-1243.00",
     description:
       "Design, optimize, and manage databases that store and serve organizational data. Roles involve both relational and NoSQL systems.",
     skills: ["SQL", "Query optimization", "Database design", "Backup & recovery", "NoSQL (MongoDB, Redis)"],
@@ -66,6 +73,7 @@ const careerFields: CareerField[] = [
   {
     id: "it_project_management",
     label: "IT Project Management",
+    onetCode: "13-1082.00",
     description:
       "Plan, execute, and close technology projects while managing scope, timelines, and teams. Bridges the gap between technical teams and business stakeholders.",
     skills: ["Agile/Scrum", "Risk management", "Budgeting", "Stakeholder communication", "PMBOK"],
@@ -75,6 +83,7 @@ const careerFields: CareerField[] = [
   {
     id: "ux_ui_design",
     label: "UX/UI Design & Human-Computer Interaction",
+    onetCode: "15-1255.00",
     description:
       "Create intuitive, accessible, and visually compelling digital experiences. Involves user research, wireframing, prototyping, and usability testing.",
     skills: ["Figma/Sketch", "User research", "Wireframing", "Accessibility", "Prototyping"],
@@ -84,6 +93,7 @@ const careerFields: CareerField[] = [
   {
     id: "ai_ml",
     label: "Artificial Intelligence & Machine Learning",
+    onetCode: "15-1221.00",
     description:
       "Build systems that can learn, reason, and make decisions. Covers deep learning, NLP, computer vision, and AI model deployment.",
     skills: ["Python", "TensorFlow/PyTorch", "Linear algebra", "NLP", "Model evaluation"],
@@ -93,6 +103,7 @@ const careerFields: CareerField[] = [
   {
     id: "it_support",
     label: "IT Support & Help Desk",
+    onetCode: "15-1232.00",
     description:
       "Provide technical assistance to end users and maintain day-to-day IT operations. A common entry point into many IT career paths.",
     skills: ["Troubleshooting", "OS administration (Windows/macOS/Linux)", "Active Directory", "Ticketing systems", "Customer service"],
@@ -102,6 +113,7 @@ const careerFields: CareerField[] = [
   {
     id: "information_systems",
     label: "Information Systems & Business Analysis",
+    onetCode: "15-1211.00",
     description:
       "Align technology with business goals. Involves analyzing business needs, designing information systems, and acting as a bridge between IT and business units.",
     skills: ["Business analysis", "ERP systems", "Process modeling", "Requirements gathering", "SQL"],
