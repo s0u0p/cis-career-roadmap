@@ -35,7 +35,7 @@ export default function AssessmentQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
 
-  if (isComplete) return <Navigate to="/report" replace />;
+  if (isComplete) return <Navigate to="/self-assessment" replace />;
 
   const current = questions[currentQuestion];
   const isMultiSelect = current?.type === "multi_select";
@@ -100,7 +100,7 @@ export default function AssessmentQuiz() {
       localStorage.setItem("studentName", name.trim());
       localStorage.setItem("studentMajor", major);
 
-      navigate("/report");
+      navigate("/self-assessment");
     }
   };
 
@@ -280,7 +280,7 @@ export default function AssessmentQuiz() {
               </CardTitle>
               {isMultiSelect && (
                 <p className="text-sm text-black/70 mt-1">
-                  Select up to {maxSelections} ·{" "}
+                  Select up to {maxSelections} ï¿½{" "}
                   {((answers[currentQuestion] as string[]) || []).length} selected
                 </p>
               )}

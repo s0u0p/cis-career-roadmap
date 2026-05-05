@@ -7,7 +7,7 @@ import ResearchExploration from "./pages/ResearchExploration";
 import SkillDevelopment from "./pages/SkillDevelopment";
 import ActionPlan from "./pages/ActionPlan";
 import AdaptabilityFlexibility from "./pages/AdaptabilityFlexibility";
-import Report from "./pages/report.tsx";
+import Report from "./pages/Report.tsx";
 import Layout from "./components/Layout";
 import RequireAssessment from "./components/RequireAssessment";
 

@@ -3,6 +3,7 @@ type Props = {
   size?: number;
   strokeWidth?: number;
   color?: string;
+  textColor?: string;
 };
 
 export default function PercentageRing({
@@ -10,6 +11,7 @@ export default function PercentageRing({
   size = 80,
   strokeWidth = 7,
   color = "#FFBB00",
+  textColor = "#FFFFFF",
 }: Props) {
   const radius = (size - strokeWidth * 2) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -54,7 +56,7 @@ export default function PercentageRing({
         dominantBaseline="middle"
         fontSize={size * 0.2}
         fontWeight="700"
-        fill="#FFFFFF"
+        fill={textColor}
       >
         {percentage}%
       </text>

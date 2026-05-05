@@ -80,7 +80,7 @@ export default function Home() {
             </p>
             <button
               onClick={() => navigate(isComplete ? "/self-assessment" : "/assessment")}
-              className="px-8 py-3 bg-[#000000] text-[#ffffff] rounded-lg hover:bg-[#FFBB00] transition-colors">
+              className="px-8 py-3 bg-[#000000] text-[#ffffff] rounded-lg hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
               {isComplete ? "View My Results" : "Get Started"}
             </button>
           </div>
@@ -125,6 +125,7 @@ export default function Home() {
             );
           })}
         </div>
+
       </div>
 
       {/* CTA Section */}

@@ -343,6 +343,7 @@ export default function SelfAssessment() {
                           percentage={field.percentage}
                           size={56}
                           strokeWidth={5}
+                          textColor="#000000"
                           color={
                             i === 0
                               ? "#FFBB00"
@@ -390,18 +391,6 @@ export default function SelfAssessment() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6 border-2 border-gray-200">
-            <h3 className="font-bold text-lg mb-2">Download Your Roadmap</h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Save a personalized PDF of your results.
-            </p>
-            <Button className="w-full bg-black text-white hover:bg-gray-800 flex items-center justify-center gap-2">
-              <Download size={16} />
-              Download PDF
-            </Button>
-            <p className="text-xs text-gray-400 mt-2 text-center">Coming soon</p>
           </div>
 
           <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">

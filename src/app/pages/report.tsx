@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { FileDown, ArrowLeft, Trophy, Star, ChevronRight } from "lucide-react";
+import { FileDown, ArrowLeft, Trophy, Star, ChevronRight, Zap, Calendar, Award } from "lucide-react";
 import { scoreAssessment } from "../assessment/scoring";
 import { generatePDF } from "../../generatePDF";
 import type { ScoredField } from "../assessment/types";
@@ -11,11 +11,16 @@ export default function Report() {
   const [studentName, setStudentName] = useState("");
   const [major, setMajor] = useState("");
   const [summary, setSummary] = useState("");
+  const [shortTermGoal, setShortTermGoal] = useState("");
+  const [midTermGoal, setMidTermGoal] = useState("");
+  const [longTermGoal, setLongTermGoal] = useState("");
+  const [actionPlan, setActionPlan] = useState("");
   const [loading, setLoading] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
+  const ACTION_PLAN_MAX = 500;
+
   useEffect(() => {
-    // Load saved answers from localStorage (set during AssessmentQuiz)
     const savedAnswers = localStorage.getItem("assessmentAnswers");
     const savedName = localStorage.getItem("studentName") || "";
     const savedMajor = localStorage.getItem("studentMajor") || "";
@@ -30,7 +35,16 @@ export default function Report() {
     setTopThree(topThree);
     setStudentName(savedName);
     setMajor(savedMajor);
+    setSummary(localStorage.getItem("studentSummary") || "");
+    setShortTermGoal(localStorage.getItem("goalShortTerm") || "");
+    setMidTermGoal(localStorage.getItem("goalMidTerm") || "");
+    setLongTermGoal(localStorage.getItem("goalLongTerm") || "");
+    setActionPlan(localStorage.getItem("actionPlan") || "");
   }, [navigate]);
+
+  function persist(key: string, value: string) {
+    localStorage.setItem(key, value);
+  }
 
   function handleDownload() {
     if (!studentName.trim()) {
@@ -43,7 +57,7 @@ export default function Report() {
     }
     setLoading(true);
     setTimeout(() => {
-      generatePDF({ studentName, major, topThree, summary });
+      generatePDF({ studentName, major, topThree, summary, shortTermGoal, midTermGoal, longTermGoal, actionPlan });
       setLoading(false);
       setDownloaded(true);
     }, 300);
@@ -84,11 +98,9 @@ export default function Report() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
 
         {/* Student Info Form */}
-        <div className="bg-white rounded-xl shadow-md p-6 border-2 border-transparent">
+        <div className="bg-white rounded-xl shadow-md p-6">
           <h2 className="text-xl font-bold mb-4">Student Information</h2>
-          <p className="text-gray-500 text-sm mb-4">
-            This will appear on your official Towson University PDF report.
-          </p>
+          <p className="text-gray-500 text-sm mb-4">This will appear on your PDF report.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -97,7 +109,7 @@ export default function Report() {
               <input
                 type="text"
                 value={studentName}
-                onChange={(e) => setStudentName(e.target.value)}
+                onChange={(e) => { setStudentName(e.target.value); persist("studentName", e.target.value); }}
                 placeholder="Jane Smith"
                 className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFBB00]"
               />
@@ -108,7 +120,7 @@ export default function Report() {
               </label>
               <select
                 value={major}
-                onChange={(e) => setMajor(e.target.value)}
+                onChange={(e) => { setMajor(e.target.value); persist("studentMajor", e.target.value); }}
                 className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFBB00]"
               >
                 <option value="">Select your major</option>
@@ -126,7 +138,6 @@ export default function Report() {
         <div className="bg-white rounded-xl shadow-md p-6">
           <h2 className="text-xl font-bold mb-1">Career Match Results</h2>
           <p className="text-gray-500 text-sm mb-6">Your top 3 matches based on your assessment</p>
-
           <div className="space-y-6">
             {topThree.map((result, i) => (
               <div key={result.id}>
@@ -160,24 +171,17 @@ export default function Report() {
             </div>
             <h2 className="text-2xl font-bold mb-2">{topThree[0].label}</h2>
             <p className="text-gray-600 mb-6">{topThree[0].description}</p>
-
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {/* Skills */}
               <div>
                 <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Key Skills</h3>
                 <div className="flex flex-wrap gap-2">
                   {topThree[0].skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="text-xs bg-green-50 text-green-700 border border-green-200 px-2.5 py-1 rounded-full font-medium"
-                    >
+                    <span key={skill} className="text-xs bg-green-50 text-green-700 border border-green-200 px-2.5 py-1 rounded-full font-medium">
                       {skill}
                     </span>
                   ))}
                 </div>
               </div>
-
-              {/* Roles */}
               <div>
                 <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Example Roles</h3>
                 <ul className="space-y-1.5">
@@ -189,8 +193,6 @@ export default function Report() {
                   ))}
                 </ul>
               </div>
-
-              {/* Certifications */}
               <div>
                 <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3">Certifications</h3>
                 <ul className="space-y-1.5">
@@ -206,7 +208,81 @@ export default function Report() {
           </div>
         )}
 
-        {/* Summary */}
+        {/* Career Goals */}
+        <div className="bg-white rounded-xl shadow-md p-6">
+          <h2 className="text-xl font-bold mb-1">Career Goals</h2>
+          <p className="text-gray-500 text-sm mb-6">
+            Edits made here are reflected on the Goal Setting page, and vice versa.
+          </p>
+          <div className="space-y-5">
+            <div>
+              <label className="flex items-center gap-2 font-bold text-sm mb-1">
+                <Zap className="text-green-600" size={16} />
+                Short-term Goal
+                <span className="text-xs font-normal text-gray-400 ml-1">0–1 year</span>
+              </label>
+              <textarea
+                value={shortTermGoal}
+                onChange={(e) => { setShortTermGoal(e.target.value); persist("goalShortTerm", e.target.value); }}
+                placeholder="e.g. Land a summer internship in cybersecurity by May 2026"
+                rows={3}
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 resize-none"
+              />
+            </div>
+            <div>
+              <label className="flex items-center gap-2 font-bold text-sm mb-1">
+                <Calendar className="text-green-600" size={16} />
+                Mid-term Goal
+                <span className="text-xs font-normal text-gray-400 ml-1">1–5 years</span>
+              </label>
+              <textarea
+                value={midTermGoal}
+                onChange={(e) => { setMidTermGoal(e.target.value); persist("goalMidTerm", e.target.value); }}
+                placeholder="e.g. Obtain a CompTIA Security+ certification and secure a full-time role as a security analyst"
+                rows={3}
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 resize-none"
+              />
+            </div>
+            <div>
+              <label className="flex items-center gap-2 font-bold text-sm mb-1">
+                <Award className="text-green-600" size={16} />
+                Long-term Goal
+                <span className="text-xs font-normal text-gray-400 ml-1">5+ years</span>
+              </label>
+              <textarea
+                value={longTermGoal}
+                onChange={(e) => { setLongTermGoal(e.target.value); persist("goalLongTerm", e.target.value); }}
+                placeholder="e.g. Lead a cybersecurity team at a major tech company or start my own consulting firm"
+                rows={3}
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-400 resize-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Action Plan */}
+        <div className="bg-white rounded-xl shadow-md p-6">
+          <h2 className="text-xl font-bold mb-1">My Action Plan</h2>
+          <p className="text-gray-500 text-sm mb-4">
+            Edits made here are reflected on the Action Plan page, and vice versa.
+          </p>
+          <textarea
+            value={actionPlan}
+            onChange={(e) => {
+              if (e.target.value.length > ACTION_PLAN_MAX) return;
+              setActionPlan(e.target.value);
+              persist("actionPlan", e.target.value);
+            }}
+            placeholder="e.g. Update resume, apply to 5 internships, and complete one certification by end of semester."
+            rows={4}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 resize-none"
+          />
+          <div className={`text-right text-xs mt-1 ${actionPlan.length >= ACTION_PLAN_MAX ? "text-red-500 font-semibold" : "text-gray-400"}`}>
+            {actionPlan.length} / {ACTION_PLAN_MAX}
+          </div>
+        </div>
+
+        {/* Personal Summary */}
         <div className="bg-white rounded-xl shadow-md p-6">
           <h2 className="text-xl font-bold mb-1">Personal Summary</h2>
           <p className="text-gray-500 text-sm mb-4">
@@ -214,7 +290,7 @@ export default function Report() {
           </p>
           <textarea
             value={summary}
-            onChange={(e) => setSummary(e.target.value)}
+            onChange={(e) => { setSummary(e.target.value); persist("studentSummary", e.target.value); }}
             placeholder="e.g. I am passionate about cybersecurity and hope to pursue a role in threat intelligence after graduation..."
             rows={4}
             className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#FFBB00] resize-none"
@@ -223,9 +299,9 @@ export default function Report() {
 
         {/* Download Button */}
         <div className="bg-black text-white rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-bold mb-2">Download Your Official Report</h2>
+          <h2 className="text-2xl font-bold mb-2">Download Your Report</h2>
           <p className="text-gray-400 mb-6 text-sm">
-            Generates a Towson University official PDF with your career results, skills, roles, and next steps.
+            Generates a PDF with your career results, goals, action plan, and next steps.
           </p>
           <button
             onClick={handleDownload}
@@ -236,9 +312,7 @@ export default function Report() {
             {loading ? "Generating PDF…" : downloaded ? "Download Again" : "Download PDF Report"}
           </button>
           {downloaded && (
-            <p className="text-green-400 text-sm mt-4">
-              ✓ Report downloaded successfully!
-            </p>
+            <p className="text-green-400 text-sm mt-4">✓ Report downloaded successfully!</p>
           )}
         </div>
 

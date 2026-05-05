@@ -1,20 +1,68 @@
 import { Link } from "react-router";
-import { 
-  ArrowRight, 
-  CheckCircle, 
+import { useState, useEffect } from "react";
+import {
+  ArrowRight,
+  CheckCircle,
   Calendar,
-  ClipboardList,
   BarChart3,
   ListChecks,
   Flag,
-  Clock,
-  MapPin,
-  Zap,
-  FileText,
-  Edit3
+  FileDown,
+  ChevronDown,
 } from "lucide-react";
+import { scoreAssessment } from "../assessment/scoring";
+import { generatePDF } from "../../generatePDF";
+
+const MAX_CHARS = 500;
 
 export default function ActionPlan() {
+  const [actionPlan, setActionPlan] = useState("");
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set());
+  function toggleSection(key: string) {
+    setOpenSections(prev => {
+      const next = new Set(prev);
+      next.has(key) ? next.delete(key) : next.add(key);
+      return next;
+    });
+  }
+  const [loading, setLoading] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
+
+  useEffect(() => {
+    setActionPlan(localStorage.getItem("actionPlan") || "");
+  }, []);
+
+  function handleActionPlanChange(value: string) {
+    if (value.length > MAX_CHARS) return;
+    setActionPlan(value);
+    localStorage.setItem("actionPlan", value);
+  }
+
+  function handleDownload() {
+    const savedAnswers = localStorage.getItem("assessmentAnswers");
+    const studentName = localStorage.getItem("studentName") || "";
+    const major = localStorage.getItem("studentMajor") || "";
+
+    if (!studentName.trim() || !major.trim() || !savedAnswers) {
+      alert("Please complete the assessment and fill in your name and major on the Report page first.");
+      return;
+    }
+
+    const answers: string[] = JSON.parse(savedAnswers);
+    const { topThree } = scoreAssessment(answers);
+    const summary = localStorage.getItem("studentSummary") || "";
+    const shortTermGoal = localStorage.getItem("goalShortTerm") || "";
+    const midTermGoal = localStorage.getItem("goalMidTerm") || "";
+    const longTermGoal = localStorage.getItem("goalLongTerm") || "";
+
+    setLoading(true);
+    setTimeout(() => {
+      generatePDF({ studentName, major, topThree, summary, shortTermGoal, midTermGoal, longTermGoal, actionPlan });
+      setLoading(false);
+      setDownloaded(true);
+    }, 300);
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
@@ -55,144 +103,96 @@ export default function ActionPlan() {
           {/* Action Plan Components */}
           <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-6">Essential Components of Your Action Plan</h2>
-            <div className="space-y-6">
-              {/* Clear Objectives */}
-              <div className="border-2 border-red-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-red-100 p-3 rounded-lg">
-                    <Flag className="text-red-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Clear Objectives</h3>
-                    <p className="text-gray-600 mb-4">
-                      Define specific, measurable outcomes you want to achieve
-                    </p>
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm font-medium mb-2">Example:</p>
-                      <p className="text-sm text-gray-600">
-                        "Secure a marketing internship at a mid-to-large sized company by May 2026"
-                      </p>
+            <div className="space-y-4">
+              {[
+                {
+                  key: "objectives",
+                  Icon: Flag,
+                  title: "Clear Objectives",
+                  body: (
+                    <>
+                      <p className="text-gray-600 mb-4">Define specific, measurable outcomes you want to achieve</p>
+                      <div className="bg-gray-50 rounded-lg p-4">
+                        <p className="text-sm font-medium mb-2">Example:</p>
+                        <p className="text-sm text-gray-600">"Secure a marketing internship at a mid-to-large sized company by May 2026"</p>
+                      </div>
+                    </>
+                  ),
+                },
+                {
+                  key: "timeline",
+                  Icon: Calendar,
+                  title: "Realistic Timeline",
+                  body: (
+                    <>
+                      <p className="text-gray-600 mb-4">Break down your goals into short-term, mid-term, and long-term milestones</p>
+                      <div className="space-y-2">
+                        {[["This Month","Update resume and LinkedIn profile"],["Next 3 Months","Apply to 10 internships, attend 2 networking events"],["Next 6 Months","Complete internship, build portfolio"]].map(([label, text]) => (
+                          <div key={label} className="flex items-center gap-3">
+                            <div className="w-3 h-3 bg-red-600 rounded-full flex-shrink-0"></div>
+                            <span className="text-sm text-gray-600"><strong>{label}:</strong> {text}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ),
+                },
+                {
+                  key: "steps",
+                  Icon: ListChecks,
+                  title: "Specific Action Steps",
+                  body: (
+                    <>
+                      <p className="text-gray-600 mb-4">List concrete tasks that move you toward your objectives</p>
+                      <ul className="space-y-2">
+                        {["Review and update your resume by March 15","Attend Marketing Club meetings every Tuesday","Complete Google Analytics certification by April 1","Conduct 3 informational interviews with marketing professionals"].map(t => (
+                          <li key={t} className="flex items-start gap-2">
+                            <CheckCircle className="text-red-600 mt-1 flex-shrink-0" size={16} />
+                            <span className="text-sm text-gray-600">{t}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  key: "tracking",
+                  Icon: BarChart3,
+                  title: "Progress Tracking System",
+                  body: (
+                    <>
+                      <p className="text-gray-600 mb-4">Establish methods to monitor and measure your advancement</p>
+                      <div className="space-y-3">
+                        {["Weekly review of completed tasks and upcoming deadlines","Monthly assessment of goal progress and adjustments needed","Quarterly big-picture evaluation and strategy refinement"].map((t, i) => (
+                          <div key={i} className="flex items-start gap-3">
+                            <div className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">{i + 1}</div>
+                            <span className="text-sm text-gray-600">{t}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ),
+                },
+              ].map(({ key, Icon, title, body }) => (
+                <div key={key} className="border-2 border-red-200 rounded-lg">
+                  <button
+                    onClick={() => toggleSection(key)}
+                    className="w-full flex items-center gap-4 p-6 text-left"
+                  >
+                    <div className="bg-red-100 p-3 rounded-lg flex-shrink-0">
+                      <Icon className="text-red-600" size={24} />
                     </div>
-                  </div>
+                    <h3 className="text-xl font-bold flex-1">{title}</h3>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-400 flex-shrink-0 transition-transform duration-200 ${openSections.has(key) ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {openSections.has(key) && (
+                    <div className="px-6 pb-6">{body}</div>
+                  )}
                 </div>
-              </div>
-
-              {/* Timeline */}
-              <div className="border-2 border-red-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-red-100 p-3 rounded-lg">
-                    <Calendar className="text-red-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Realistic Timeline</h3>
-                    <p className="text-gray-600 mb-4">
-                      Break down your goals into short-term, mid-term, and long-term milestones
-                    </p>
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-                        <span className="text-sm text-gray-600">
-                          <strong>This Month:</strong> Update resume and LinkedIn profile
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-                        <span className="text-sm text-gray-600">
-                          <strong>Next 3 Months:</strong> Apply to 10 internships, attend 2 networking events
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 bg-red-600 rounded-full"></div>
-                        <span className="text-sm text-gray-600">
-                          <strong>Next 6 Months:</strong> Complete internship, build portfolio
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Steps */}
-              <div className="border-2 border-red-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-red-100 p-3 rounded-lg">
-                    <ListChecks className="text-red-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Specific Action Steps</h3>
-                    <p className="text-gray-600 mb-4">
-                      List concrete tasks that move you toward your objectives
-                    </p>
-                    <ul className="space-y-2">
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-red-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Review and update your resume by March 15
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-red-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Attend Marketing Club meetings every Tuesday
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-red-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Complete Google Analytics certification by April 1
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <CheckCircle className="text-red-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Conduct 3 informational interviews with marketing professionals
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Progress Tracking */}
-              <div className="border-2 border-red-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-red-100 p-3 rounded-lg">
-                    <BarChart3 className="text-red-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Progress Tracking System</h3>
-                    <p className="text-gray-600 mb-4">
-                      Establish methods to monitor and measure your advancement
-                    </p>
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">
-                          1
-                        </div>
-                        <span className="text-sm text-gray-600">
-                          Weekly review of completed tasks and upcoming deadlines
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">
-                          2
-                        </div>
-                        <span className="text-sm text-gray-600">
-                          Monthly assessment of goal progress and adjustments needed
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <div className="w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">
-                          3
-                        </div>
-                        <span className="text-sm text-gray-600">
-                          Quarterly big-picture evaluation and strategy refinement
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -360,118 +360,35 @@ export default function ActionPlan() {
                 </div>
               </div>
             </div>
-
-            <div>
-              <h3 className="text-xl font-bold mb-3 text-teal-700">Adaptability & Growth Actions</h3>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
-                    1
-                  </div>
-                  <p className="text-gray-700">
-                    Identify one area outside your comfort zone and commit to learning about it this month
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
-                    2
-                  </div>
-                  <p className="text-gray-700">
-                    Create a "Plan B" for your career—identify alternative paths if your current plan changes
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
-                    3
-                  </div>
-                  <p className="text-gray-700">
-                    Join a professional group or community in an adjacent field to broaden your perspective
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
-                    4
-                  </div>
-                  <p className="text-gray-700">
-                    Practice mindfulness or stress-management techniques to build emotional resilience
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
-                    5
-                  </div>
-                  <p className="text-gray-700">
-                    Reflect quarterly on your skills and identify emerging trends that might affect your career
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Sidebar */}
         <div className="space-y-6">
           <div className="bg-[#FFBB00] rounded-lg p-6">
-            <h3 className="font-bold text-xl mb-4">Planning Tools</h3>
+            <h3 className="font-bold text-xl mb-4">Planning Tips</h3>
             <ul className="space-y-3">
               <li>
                 <a href="#" className="flex items-center gap-2 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  <FileText size={18} />
-                  <span className="text-sm">Action Plan Template</span>
+                  <span className="text-sm">Start small - Begin with one achievable task to build momentum</span>
                 </a>
               </li>
               <li>
                 <a href="#" className="flex items-center gap-2 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  <Calendar size={18} />
-                  <span className="text-sm">Timeline Builder</span>
+                  <span className="text-sm">Be specific - Vague plans lead to vague results</span>
                 </a>
               </li>
               <li>
                 <a href="#" className="flex items-center gap-2 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  <BarChart3 size={18} />
-                  <span className="text-sm">Progress Tracker</span>
+                  <span className="text-sm">Take action now - Perfect plans aren't as valuable as imperfect action</span>
                 </a>
               </li>
               <li>
                 <a href="#" className="flex items-center gap-2 p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  <Edit3 size={18} />
-                  <span className="text-sm">Goal Setting Worksheet</span>
+                  <span className="text-sm">Track your progress - Document what you do so you can look back on it later</span>
                 </a>
               </li>
             </ul>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="font-bold text-xl mb-4">Quick Tips</h3>
-            <div className="space-y-4">
-              <div className="flex gap-3">
-                <Clock className="text-red-600 flex-shrink-0" size={20} />
-                <div>
-                  <p className="text-sm font-medium mb-1">Start Small</p>
-                  <p className="text-xs text-gray-600">
-                    Begin with one achievable task to build momentum
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <MapPin className="text-red-600 flex-shrink-0" size={20} />
-                <div>
-                  <p className="text-sm font-medium mb-1">Be Specific</p>
-                  <p className="text-xs text-gray-600">
-                    Vague plans lead to vague results
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <Zap className="text-red-600 flex-shrink-0" size={20} />
-                <div>
-                  <p className="text-sm font-medium mb-1">Take Action Now</p>
-                  <p className="text-xs text-gray-600">
-                    Perfect plans aren't as valuable as imperfect action
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div className="bg-red-100 rounded-lg p-6">
@@ -491,6 +408,24 @@ export default function ActionPlan() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* My Action Plan */}
+      <div className="bg-white rounded-lg shadow-md p-8 mb-12">
+        <h2 className="text-2xl font-bold mb-1">My Action Plan</h2>
+        <p className="text-gray-500 text-sm mb-4">
+          Summarize your personal action plan in 200 characters or fewer. This will appear in your PDF report.
+        </p>
+        <textarea
+          value={actionPlan}
+          onChange={(e) => handleActionPlanChange(e.target.value)}
+          placeholder="e.g. Update resume, apply to 5 internships, and complete one certification by end of semester."
+          rows={4}
+          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 resize-none"
+        />
+        <div className={`text-right text-xs mt-1 ${actionPlan.length >= MAX_CHARS ? "text-red-500 font-semibold" : "text-gray-400"}`}>
+          {actionPlan.length} / {MAX_CHARS}
         </div>
       </div>
 
