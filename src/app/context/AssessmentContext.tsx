@@ -18,23 +18,23 @@ type AssessmentContextType = {
 const AssessmentContext = createContext<AssessmentContextType | null>(null);
 
 export function AssessmentProvider({ children }: { children: ReactNode }) {
-  // Result persists in localStorage so page refreshes don't lose it
+  // Result persists in sessionStorage so page refreshes don't lose it
   const [result, setResultState] = useState<AssessmentResult | null>(() => {
     try {
-      const stored = localStorage.getItem("assessment_result");
+      const stored = sessionStorage.getItem("assessment_result");
       return stored ? JSON.parse(stored) : null;
     } catch {
       return null;
     }
   });
 
-  // Name and major are session-only, stored in React state, never in localStorage
+  // Name and major are session-only, stored in React state, never in sessionStorage
   // They disappear automatically when the browser tab is closed
   const [studentInfo, setStudentInfoState] = useState<StudentInfo | null>(null);
 
   const setResult = (newResult: AssessmentResult) => {
     setResultState(newResult);
-    localStorage.setItem("assessment_result", JSON.stringify(newResult));
+    sessionStorage.setItem("assessment_result", JSON.stringify(newResult));
   };
 
   const setStudentInfo = (info: StudentInfo) => {
@@ -44,7 +44,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
   const clearResult = () => {
     setResultState(null);
     setStudentInfoState(null);
-    localStorage.removeItem("assessment_result");
+    sessionStorage.removeItem("assessment_result");
   };
 
   return (

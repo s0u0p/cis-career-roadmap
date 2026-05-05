@@ -8,14 +8,14 @@ export default function GoalSetting() {
   const [longTerm, setLongTerm] = useState("");
 
   useEffect(() => {
-    setShortTerm(localStorage.getItem("goalShortTerm") || "");
-    setMidTerm(localStorage.getItem("goalMidTerm") || "");
-    setLongTerm(localStorage.getItem("goalLongTerm") || "");
+    setShortTerm(sessionStorage.getItem("goalShortTerm") || "");
+    setMidTerm(sessionStorage.getItem("goalMidTerm") || "");
+    setLongTerm(sessionStorage.getItem("goalLongTerm") || "");
   }, []);
 
   function handleChange(key: string, value: string, setter: (v: string) => void) {
     setter(value);
-    localStorage.setItem(key, value);
+    sessionStorage.setItem(key, value);
   }
 
   return (

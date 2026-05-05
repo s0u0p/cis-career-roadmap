@@ -29,19 +29,19 @@ export default function ActionPlan() {
   const [downloaded, setDownloaded] = useState(false);
 
   useEffect(() => {
-    setActionPlan(localStorage.getItem("actionPlan") || "");
+    setActionPlan(sessionStorage.getItem("actionPlan") || "");
   }, []);
 
   function handleActionPlanChange(value: string) {
     if (value.length > MAX_CHARS) return;
     setActionPlan(value);
-    localStorage.setItem("actionPlan", value);
+    sessionStorage.setItem("actionPlan", value);
   }
 
   function handleDownload() {
-    const savedAnswers = localStorage.getItem("assessmentAnswers");
-    const studentName = localStorage.getItem("studentName") || "";
-    const major = localStorage.getItem("studentMajor") || "";
+    const savedAnswers = sessionStorage.getItem("assessmentAnswers");
+    const studentName = sessionStorage.getItem("studentName") || "";
+    const major = sessionStorage.getItem("studentMajor") || "";
 
     if (!studentName.trim() || !major.trim() || !savedAnswers) {
       alert("Please complete the assessment and fill in your name and major on the Report page first.");
@@ -50,10 +50,10 @@ export default function ActionPlan() {
 
     const answers: string[] = JSON.parse(savedAnswers);
     const { topThree } = scoreAssessment(answers);
-    const summary = localStorage.getItem("studentSummary") || "";
-    const shortTermGoal = localStorage.getItem("goalShortTerm") || "";
-    const midTermGoal = localStorage.getItem("goalMidTerm") || "";
-    const longTermGoal = localStorage.getItem("goalLongTerm") || "";
+    const summary = sessionStorage.getItem("studentSummary") || "";
+    const shortTermGoal = sessionStorage.getItem("goalShortTerm") || "";
+    const midTermGoal = sessionStorage.getItem("goalMidTerm") || "";
+    const longTermGoal = sessionStorage.getItem("goalLongTerm") || "";
 
     setLoading(true);
     setTimeout(() => {

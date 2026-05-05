@@ -96,9 +96,9 @@ export default function AssessmentQuiz() {
       const scored = scoreAssessment(answerIds);
       setResult(scored);
 
-      localStorage.setItem("assessmentAnswers", JSON.stringify(answerIds));
-      localStorage.setItem("studentName", name.trim());
-      localStorage.setItem("studentMajor", major);
+      sessionStorage.setItem("assessmentAnswers", JSON.stringify(answerIds));
+      sessionStorage.setItem("studentName", name.trim());
+      sessionStorage.setItem("studentMajor", major);
 
       navigate("/self-assessment");
     }

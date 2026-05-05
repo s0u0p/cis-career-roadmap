@@ -21,9 +21,9 @@ export default function Report() {
   const ACTION_PLAN_MAX = 500;
 
   useEffect(() => {
-    const savedAnswers = localStorage.getItem("assessmentAnswers");
-    const savedName = localStorage.getItem("studentName") || "";
-    const savedMajor = localStorage.getItem("studentMajor") || "";
+    const savedAnswers = sessionStorage.getItem("assessmentAnswers");
+    const savedName = sessionStorage.getItem("studentName") || "";
+    const savedMajor = sessionStorage.getItem("studentMajor") || "";
 
     if (!savedAnswers) {
       navigate("/assessment");
@@ -35,15 +35,15 @@ export default function Report() {
     setTopThree(topThree);
     setStudentName(savedName);
     setMajor(savedMajor);
-    setSummary(localStorage.getItem("studentSummary") || "");
-    setShortTermGoal(localStorage.getItem("goalShortTerm") || "");
-    setMidTermGoal(localStorage.getItem("goalMidTerm") || "");
-    setLongTermGoal(localStorage.getItem("goalLongTerm") || "");
-    setActionPlan(localStorage.getItem("actionPlan") || "");
+    setSummary(sessionStorage.getItem("studentSummary") || "");
+    setShortTermGoal(sessionStorage.getItem("goalShortTerm") || "");
+    setMidTermGoal(sessionStorage.getItem("goalMidTerm") || "");
+    setLongTermGoal(sessionStorage.getItem("goalLongTerm") || "");
+    setActionPlan(sessionStorage.getItem("actionPlan") || "");
   }, [navigate]);
 
   function persist(key: string, value: string) {
-    localStorage.setItem(key, value);
+    sessionStorage.setItem(key, value);
   }
 
   function handleDownload() {

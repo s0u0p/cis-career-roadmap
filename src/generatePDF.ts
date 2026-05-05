@@ -1,4 +1,4 @@
-﻿import jsPDF from "jspdf";
+import jsPDF from "jspdf";
 import type { ScoredField } from "./app/assessment/types";
 
 export interface PDFReportData {
@@ -36,7 +36,7 @@ export function generatePDF(data: PDFReportData): void {
   const W = 612, H = 792, M = 54;
   let y = 0;
 
-  // ── Register Towson fonts
+  // -- Register Towson fonts
   doc.addFileToVFS("ProximaNova-Regular.ttf", PN_REGULAR);
   doc.addFileToVFS("ProximaNova-Bold.ttf", PN_BOLD);
   doc.addFileToVFS("ProximaNova-Semibold.ttf", PN_SEMI);
@@ -94,8 +94,8 @@ export function generatePDF(data: PDFReportData): void {
     doc.setFont(PN, "bold");
     doc.setFontSize(11);
     doc.setTextColor(...C.dkgray);
-    doc.text(value1 || "—", M, y);
-    if (label2) doc.text(value2 || "—", M + cw, y);
+    doc.text(value1 || "�", M, y);
+    if (label2) doc.text(value2 || "�", M + cw, y);
     y += 20;
   }
 
@@ -158,7 +158,7 @@ export function generatePDF(data: PDFReportData): void {
     y += Math.ceil(roles.length / cols) * 18 + 10;
   }
 
-  // ── PAGE 1
+  // -- PAGE 1
   drawTemplate(1);
   y = 104;
 
@@ -244,7 +244,7 @@ export function generatePDF(data: PDFReportData): void {
     doc.text(al, M + 10, y + 6);
     y += abH + 12;
   }
-  // ── PAGE 2
+  // -- PAGE 2
   doc.addPage();
   drawTemplate(2);
   y = 104;
