@@ -7,6 +7,7 @@ import ResearchExploration from "./pages/ResearchExploration";
 import SkillDevelopment from "./pages/SkillDevelopment";
 import ActionPlan from "./pages/ActionPlan";
 import AdaptabilityFlexibility from "./pages/AdaptabilityFlexibility";
+import Report from "./pages/Report.tsx";
 import Layout from "./components/Layout";
 import RequireAssessment from "./components/RequireAssessment";
 
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
           { path: "skill-development", Component: SkillDevelopment },
           { path: "action-plan", Component: ActionPlan },
           { path: "adaptability-flexibility", Component: AdaptabilityFlexibility },
+          { path: "report", Component: Report },
         ],
       },
     ],

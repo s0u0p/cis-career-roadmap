@@ -1,6 +1,12 @@
 import { Outlet, Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 
 const steps = [
   { number: 1, title: "Self Assessment", path: "/self-assessment" },
@@ -17,8 +23,9 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <ScrollToTop />
       {/* Header */}
-      <header className="bg-[#FFBB00] border-b border-gray-200">
+      <header className="bg-[#FFBB00] border-b border-black-200 shadow-background-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link to="/" className="flex items-center gap-3">
@@ -49,18 +56,31 @@ export default function Layout() {
                 Home
               </Link>
               {steps.map((step) => (
-                <Link
-                  key={step.number}
-                  to={step.path}
-                  className={`px-3 py-2 rounded-md text-sm transition-colors ${
-                    location.pathname === step.path
-                      ? "bg-black text-white"
-                      : "text-black hover:bg-yellow-300"
-                  }`}
-                >
-                  Step {step.number}
-                </Link>
-              ))}
+  <Link
+    key={step.number}
+    to={step.path}
+    className={`relative group px-3 py-2 rounded-md text-sm transition-colors ${
+      location.pathname === step.path
+        ? "bg-black text-white"
+        : "text-black hover:bg-yellow-300"
+    }`}
+  >
+    Step {step.number}
+    <span className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-1 bg-black text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+      Step {step.number}: {step.title}
+    </span>
+  </Link>
+))}
+              <Link
+                to="/report"
+                className={`px-3 py-2 rounded-md text-sm font-bold transition-colors ${
+                  location.pathname === "/report"
+                    ? "bg-black text-[#FFBB00]"
+                    : "bg-black text-[#FFBB00] hover:bg-gray-800"
+                }`}
+              >
+                Report
+              </Link>
             </nav>
           </div>
 
@@ -92,6 +112,13 @@ export default function Layout() {
                   Step {step.number}: {step.title}
                 </Link>
               ))}
+              <Link
+                to="/report"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-3 py-2 rounded-md bg-black text-[#FFBB00] font-bold hover:bg-gray-800"
+              >
+                Report
+              </Link>
             </nav>
           )}
         </div>
@@ -107,7 +134,7 @@ export default function Layout() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-bold mb-3">Towson University: Department of Computer and Information Science</h3>
+              <h3 className="font-bold mb-3">Towson University: Department of Computer and Information Sciences</h3>
               <p className="text-sm text-gray-300">
                 7800 York Road<br />
                 Towson, MD 21252
@@ -128,7 +155,7 @@ export default function Layout() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
-            © 2026 Towson University. All rights reserved.
+            
           </div>
         </div>
       </footer>

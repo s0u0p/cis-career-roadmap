@@ -1,20 +1,46 @@
 import { Link } from "react-router";
-import { 
-  ArrowRight, 
-  TrendingUp, 
-  GraduationCap, 
-  Users2, 
-  Award, 
+import { useState } from "react";
+import {
+  ArrowRight,
+  TrendingUp,
+  GraduationCap,
+  Users2,
+  Award,
   Laptop,
   MessageSquare,
   Lightbulb,
   Target,
   CheckCircle2,
   BookMarked,
-  Briefcase
+  Briefcase,
+  ExternalLink,
+  Clock,
+  ChevronDown,
 } from "lucide-react";
+import { useAssessment } from "../context/AssessmentContext";
+import certifications from "../data/certifications";
+
+const LEVEL_COLORS: Record<string, string> = {
+  Entry: "bg-green-100 text-green-700",
+  Associate: "bg-blue-100 text-blue-700",
+  Intermediate: "bg-purple-100 text-purple-700",
+  Professional: "bg-orange-100 text-orange-700",
+  Specialty: "bg-red-100 text-red-700",
+};
 
 export default function SkillDevelopment() {
+  const { result } = useAssessment();
+  const top3 = result?.allResults.slice(0, 3) ?? [];
+  const [openField, setOpenField] = useState<string | null>(top3[0]?.id ?? null);
+  const [openSkills, setOpenSkills] = useState<Set<string>>(new Set());
+  function toggleSkill(key: string) {
+    setOpenSkills(prev => {
+      const next = new Set(prev);
+      next.has(key) ? next.delete(key) : next.add(key);
+      return next;
+    });
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
@@ -87,170 +113,66 @@ export default function SkillDevelopment() {
           {/* Skill Categories */}
           <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-6">Essential Skill Categories</h2>
-            <div className="space-y-6">
-              {/* Technical Skills */}
-              <div className="border-2 border-orange-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-orange-100 p-3 rounded-lg">
-                    <Laptop className="text-orange-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Technical & Hard Skills</h3>
-                    <p className="text-gray-600 mb-4">
-                      Industry-specific knowledge and technical competencies required for your field
-                    </p>
-                    <div className="space-y-2">
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Software proficiency (Microsoft Office, Adobe Suite, programming languages)
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Data analysis and interpretation tools
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Industry certifications and specialized training
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Technical writing and documentation
-                        </span>
+            <div className="space-y-4">
+              {[
+                {
+                  key: "technical",
+                  Icon: Laptop,
+                  title: "Technical & Hard Skills",
+                  desc: "Industry-specific knowledge and technical competencies required for your field",
+                  items: ["Software proficiency (Microsoft Office, Adobe Suite, programming languages)","Data analysis and interpretation tools","Industry certifications and specialized training","Technical writing and documentation"],
+                },
+                {
+                  key: "communication",
+                  Icon: MessageSquare,
+                  title: "Communication Skills",
+                  desc: "The ability to effectively convey ideas and collaborate with others",
+                  items: ["Verbal communication and public speaking","Written communication (emails, reports, presentations)","Active listening and empathy","Cross-cultural and virtual communication"],
+                },
+                {
+                  key: "leadership",
+                  Icon: Users2,
+                  title: "Leadership & Teamwork",
+                  desc: "Working effectively with others and inspiring positive outcomes",
+                  items: ["Team collaboration and conflict resolution","Project management and delegation","Mentoring and coaching others","Decision-making and strategic thinking"],
+                },
+                {
+                  key: "problemsolving",
+                  Icon: Lightbulb,
+                  title: "Critical Thinking & Problem Solving",
+                  desc: "Analyzing situations and developing creative, effective solutions",
+                  items: ["Analytical thinking and data-driven decision making","Creative thinking and innovation","Research and information gathering","Troubleshooting and adaptability"],
+                },
+              ].map(({ key, Icon, title, desc, items }) => (
+                <div key={key} className="border-2 border-orange-200 rounded-lg">
+                  <button
+                    onClick={() => toggleSkill(key)}
+                    className="w-full flex items-center gap-4 p-6 text-left"
+                  >
+                    <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
+                      <Icon className="text-orange-600" size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold flex-1">{title}</h3>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-400 flex-shrink-0 transition-transform duration-200 ${openSkills.has(key) ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {openSkills.has(key) && (
+                    <div className="px-6 pb-6">
+                      <p className="text-gray-600 mb-4">{desc}</p>
+                      <div className="space-y-2">
+                        {items.map(t => (
+                          <div key={t} className="flex items-start gap-2">
+                            <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
+                            <span className="text-sm text-gray-600">{t}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
-              </div>
-
-              {/* Communication Skills */}
-              <div className="border-2 border-orange-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-orange-100 p-3 rounded-lg">
-                    <MessageSquare className="text-orange-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Communication Skills</h3>
-                    <p className="text-gray-600 mb-4">
-                      The ability to effectively convey ideas and collaborate with others
-                    </p>
-                    <div className="space-y-2">
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Verbal communication and public speaking
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Written communication (emails, reports, presentations)
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Active listening and empathy
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Cross-cultural and virtual communication
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Leadership & Teamwork */}
-              <div className="border-2 border-orange-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-orange-100 p-3 rounded-lg">
-                    <Users2 className="text-orange-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Leadership & Teamwork</h3>
-                    <p className="text-gray-600 mb-4">
-                      Working effectively with others and inspiring positive outcomes
-                    </p>
-                    <div className="space-y-2">
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Team collaboration and conflict resolution
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Project management and delegation
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Mentoring and coaching others
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Decision-making and strategic thinking
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Problem Solving */}
-              <div className="border-2 border-orange-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-orange-100 p-3 rounded-lg">
-                    <Lightbulb className="text-orange-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Critical Thinking & Problem Solving</h3>
-                    <p className="text-gray-600 mb-4">
-                      Analyzing situations and developing creative, effective solutions
-                    </p>
-                    <div className="space-y-2">
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Analytical thinking and data-driven decision making
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Creative thinking and innovation
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Research and information gathering
-                        </span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <CheckCircle2 className="text-orange-600 mt-1 flex-shrink-0" size={16} />
-                        <span className="text-sm text-gray-600">
-                          Troubleshooting and adaptability
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -339,69 +261,86 @@ export default function SkillDevelopment() {
             <h3 className="font-bold text-xl mb-4">Learning Resources</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="https://www.towson.edu/technology/training/resources/linkedin-learning.html" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
                   LinkedIn Learning
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
                   Coursera
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="https://www.toastmasters.org/" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
                   Toastmasters (Public Speaking)
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  Industry Certifications Guide
-                </a>
-              </li>
-              <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="https://www.towson.edu/tutoring-learning/academic-support/workshops/" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
                   TU Skills Workshops
                 </a>
               </li>
             </ul>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="font-bold text-xl mb-4">Skill Assessment Tools</h3>
-            <p className="text-sm text-gray-600 mb-4">
-              Use these tools to identify and track your skill development:
-            </p>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                Skills Inventory Worksheet
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                LinkedIn Skills Assessment
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                Professional Development Tracker
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-orange-100 rounded-lg p-6">
-            <h3 className="font-bold text-xl mb-4">Top Skills in Demand</h3>
-            <div className="space-y-3">
-              <div className="bg-white rounded-lg p-3">
-                <div className="font-bold mb-1">1. Data Analysis</div>
-                <div className="text-xs text-gray-600">Growing 28% annually</div>
+          <div className="bg-[#FFBB00] rounded-lg p-5">
+            <h3 className="font-bold text-lg mb-3">Recommended Certifications</h3>
+            {top3.length === 0 ? (
+              <p className="text-sm bg-white rounded-lg p-3">
+                Complete the assessment to see certifications tailored to your top career matches.
+              </p>
+            ) : (
+              <div className="space-y-2">
+                {top3.map((field) => {
+                  const certs = certifications[field.id] ?? [];
+                  const isOpen = openField === field.id;
+                  return (
+                    <div key={field.id} className="rounded-lg overflow-hidden">
+                      <button
+                        onClick={() => setOpenField(isOpen ? null : field.id)}
+                        className="w-full flex items-center justify-between bg-white bg-opacity-80 hover:bg-opacity-100 transition-all px-3 py-2.5 text-left"
+                      >
+                        <span className="font-semibold text-xs">{field.label}</span>
+                        <ChevronDown
+                          size={14}
+                          className={`flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                      {isOpen && (
+                        <div className="space-y-1.5 pt-1.5">
+                          {certs.map((cert) => (
+                            <a
+                              key={cert.name}
+                              href={cert.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block bg-white rounded-lg p-3 hover:bg-gray-50 transition-colors"
+                            >
+                              <div className="flex items-start justify-between gap-1 mb-1">
+                                <span className="font-semibold text-xs leading-tight">{cert.name}</span>
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium whitespace-nowrap flex-shrink-0 ${LEVEL_COLORS[cert.level]}`}>
+                                  {cert.level}
+                                </span>
+                              </div>
+                              <p className="text-[11px] text-gray-500 mb-1">{cert.description}</p>
+                              <div className="flex items-center justify-between">
+                                <span className="flex items-center gap-1 text-[10px] text-gray-400">
+                                  <Clock size={10} />
+                                  {cert.duration}
+                                </span>
+                                <span className="flex items-center gap-0.5 text-[10px] text-orange-600 font-medium">
+                                  Learn More <ExternalLink size={9} />
+                                </span>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-              <div className="bg-white rounded-lg p-3">
-                <div className="font-bold mb-1">2. Digital Literacy</div>
-                <div className="text-xs text-gray-600">Essential across all fields</div>
-              </div>
-              <div className="bg-white rounded-lg p-3">
-                <div className="text-xs text-gray-600">Top soft skill for leaders</div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

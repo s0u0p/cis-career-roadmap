@@ -1,18 +1,29 @@
 import { Link } from "react-router";
-import { 
-  ArrowRight, 
-  Search, 
-  Briefcase, 
-  Building2, 
-  Users, 
-  Globe, 
+import { useState } from "react";
+import {
+  ArrowRight,
+  Search,
+  Briefcase,
+  Building2,
+  Users,
+  Globe,
   BookOpen,
   Network,
   TrendingUp,
-  FileText
+  FileText,
+  ChevronDown,
 } from "lucide-react";
 
 export default function ResearchExploration() {
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set());
+  function toggle(key: string) {
+    setOpenSections(prev => {
+      const next = new Set(prev);
+      next.has(key) ? next.delete(key) : next.add(key);
+      return next;
+    });
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
@@ -53,139 +64,90 @@ export default function ResearchExploration() {
           {/* Research Areas */}
           <div className="bg-white rounded-lg shadow-md p-8">
             <h2 className="text-2xl font-bold mb-6">Key Research Areas</h2>
-            <div className="space-y-6">
-              {/* Career Fields */}
-              <div className="border-2 border-purple-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-purple-100 p-3 rounded-lg">
-                    <Briefcase className="text-purple-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Career Fields & Occupations</h3>
-                    <p className="text-gray-600 mb-4">
-                      Explore different career paths and understand day-to-day responsibilities, 
-                      qualifications, and career progression opportunities.
-                    </p>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Research job descriptions and required qualifications
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Review salary ranges and compensation packages
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Understand typical career progression paths
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Identify related and alternative career options
-                      </li>
-                    </ul>
-                  </div>
+            <div className="space-y-4">
+              {[
+                {
+                  key: "careers",
+                  Icon: Briefcase,
+                  title: "Career Fields & Occupations",
+                  body: (
+                    <>
+                      <p className="text-gray-600 mb-4">Explore different career paths and understand day-to-day responsibilities, qualifications, and career progression opportunities.</p>
+                      <ul className="space-y-2 text-sm text-gray-600">
+                        {["Research job descriptions and required qualifications","Review salary ranges and compensation packages","Understand typical career progression paths","Identify related and alternative career options"].map(t => (
+                          <li key={t} className="flex items-center gap-2"><div className="w-2 h-2 bg-purple-600 rounded-full flex-shrink-0"></div>{t}</li>
+                        ))}
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  key: "industries",
+                  Icon: Building2,
+                  title: "Industries & Sectors",
+                  body: (
+                    <>
+                      <p className="text-gray-600 mb-4">Understand different industry landscapes, growth trends, and organizational cultures.</p>
+                      <ul className="space-y-2 text-sm text-gray-600">
+                        {["Study industry growth projections and market trends","Research major companies and employers in the field","Understand industry challenges and opportunities","Follow industry news and professional publications"].map(t => (
+                          <li key={t} className="flex items-center gap-2"><div className="w-2 h-2 bg-purple-600 rounded-full flex-shrink-0"></div>{t}</li>
+                        ))}
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  key: "interviews",
+                  Icon: Users,
+                  title: "Informational Interviews",
+                  body: (
+                    <>
+                      <p className="text-gray-600 mb-4">Connect with professionals to gain insider perspectives and build your network.</p>
+                      <ul className="space-y-2 text-sm text-gray-600">
+                        {["Identify alumni and professionals in your target field","Prepare thoughtful questions about their career journey","Learn about unwritten rules and cultural norms","Build relationships for future opportunities"].map(t => (
+                          <li key={t} className="flex items-center gap-2"><div className="w-2 h-2 bg-purple-600 rounded-full flex-shrink-0"></div>{t}</li>
+                        ))}
+                      </ul>
+                    </>
+                  ),
+                },
+                {
+                  key: "jobmarket",
+                  Icon: TrendingUp,
+                  title: "Job Market Analysis",
+                  body: (
+                    <>
+                      <p className="text-gray-600 mb-4">Understand employment trends, demand, and geographic considerations.</p>
+                      <ul className="space-y-2 text-sm text-gray-600">
+                        {["Review Bureau of Labor Statistics data and projections","Analyze job posting trends and required skills","Research geographic hotspots for your field","Identify emerging roles and future opportunities"].map(t => (
+                          <li key={t} className="flex items-center gap-2"><div className="w-2 h-2 bg-purple-600 rounded-full flex-shrink-0"></div>{t}</li>
+                        ))}
+                      </ul>
+                    </>
+                  ),
+                },
+              ].map(({ key, Icon, title, body }) => (
+                <div key={key} className="border-2 border-purple-200 rounded-lg">
+                  <button
+                    onClick={() => toggle(key)}
+                    className="w-full flex items-center gap-4 p-6 text-left"
+                  >
+                    <div className="bg-purple-100 p-3 rounded-lg flex-shrink-0">
+                      <Icon className="text-purple-600" size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold flex-1">{title}</h3>
+                    <ChevronDown
+                      size={20}
+                      className={`text-gray-400 flex-shrink-0 transition-transform duration-200 ${openSections.has(key) ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {openSections.has(key) && (
+                    <div className="px-6 pb-6">
+                      {body}
+                    </div>
+                  )}
                 </div>
-              </div>
-
-              {/* Industries */}
-              <div className="border-2 border-purple-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-purple-100 p-3 rounded-lg">
-                    <Building2 className="text-purple-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Industries & Sectors</h3>
-                    <p className="text-gray-600 mb-4">
-                      Understand different industry landscapes, growth trends, and organizational cultures.
-                    </p>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Study industry growth projections and market trends
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Research major companies and employers in the field
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Understand industry challenges and opportunities
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Follow industry news and professional publications
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Networking */}
-              <div className="border-2 border-purple-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-purple-100 p-3 rounded-lg">
-                    <Users className="text-purple-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Informational Interviews</h3>
-                    <p className="text-gray-600 mb-4">
-                      Connect with professionals to gain insider perspectives and build your network.
-                    </p>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Identify alumni and professionals in your target field
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Prepare thoughtful questions about their career journey
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Learn about unwritten rules and cultural norms
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Build relationships for future opportunities
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Job Market */}
-              <div className="border-2 border-purple-200 rounded-lg p-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-purple-100 p-3 rounded-lg">
-                    <TrendingUp className="text-purple-600" size={24} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-2">Job Market Analysis</h3>
-                    <p className="text-gray-600 mb-4">
-                      Understand employment trends, demand, and geographic considerations.
-                    </p>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Review Bureau of Labor Statistics data and projections
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Analyze job posting trends and required skills
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Research geographic hotspots for your field
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-                        Identify emerging roles and future opportunities
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
@@ -232,28 +194,28 @@ export default function ResearchExploration() {
             <h3 className="font-bold text-xl mb-4">Research Tools</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="https://www.onetonline.org/" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
                   O*NET Online
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="https://www.bls.gov/" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
                   Bureau of Labor Statistics
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="https://business.linkedin.com/talent-solutions/c/15/8/industry-insights" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
                   LinkedIn Industry Insights
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                <a href="https://www.glassdoor.com/Reviews/index.htm" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
                   Glassdoor Company Reviews
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  Industry Association Directory
+                <a href="https://towson.libguides.com/industries/associations" target="_blank" rel="noopener noreferrer" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                  Towson Trade Associations Guide
                 </a>
               </li>
             </ul>

@@ -1,3 +1,5 @@
+import { useAssessment } from "../context/AssessmentContext";
+import { useNavigate } from "react-router";
 import { Link } from "react-router";
 import { 
   UserCircle, 
@@ -61,6 +63,8 @@ const steps = [
 ];
 
 export default function Home() {
+  const { isComplete } = useAssessment();
+  const navigate = useNavigate();
   return (
     <div>
       {/* Hero Section */}
@@ -74,13 +78,11 @@ export default function Home() {
               A comprehensive 6-step guide to help Towson University CIS students 
               navigate their career journey with confidence and purpose.
             </p>
-            <Link
-              to="/research-exploration"
-              className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors"
-            >
-              Get Started
-              <ArrowRight size={20} />
-            </Link>
+            <button
+              onClick={() => navigate(isComplete ? "/self-assessment" : "/assessment")}
+              className="px-8 py-3 bg-[#000000] text-[#ffffff] rounded-lg hover:bg-[#ffffff] hover:text-[#000000] transition-colors">
+              {isComplete ? "View My Results" : "Get Started"}
+            </button>
           </div>
         </div>
       </div>
@@ -123,6 +125,7 @@ export default function Home() {
             );
           })}
         </div>
+
       </div>
 
       {/* CTA Section */}
@@ -142,12 +145,6 @@ export default function Home() {
               >
                 Start from beginning
               </Link>
-              <a
-                href="mailto:cisadvising@towson.edu"
-                className="px-8 py-3 bg-white text-black rounded-lg hover:bg-gray-200 transition-colors"
-              >
-                Schedule an advising pppointment
-              </a>
             </div>
           </div>
         </div>
