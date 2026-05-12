@@ -4,10 +4,10 @@
 
 A web-based career planning tool built for the Towson University Computer and Information Sciences department. The platform guides CIS students through a structured six-step career readiness process.
 
-#The Problem
+# The Problem
 Incoming, current, and transfer CIS students lacked a centralized, structured resource for career planning. Students had no easy way to discover which CIS career paths aligned with their interests and strengths.
 
-#The Solution
+# The Solution
 A personalized roadmap website that walks students through six sequential steps:
 
 Self Assessment — Students enter their name and major, then answer 11 questions across multiple sections. A weighted scoring engine evaluates their answers and matches them against 12 CIS career fields, returning their top 3 matches with percentage scores.
@@ -18,7 +18,7 @@ Action Plan — Students build a personalized action plan based on their assessm
 Adaptability & Flexibility — Guidance on staying adaptable in a changing technology landscape.
 
 
-#Key Features
+# Key Features
 
 Weighted scoring engine that matches students to 12 career fields including Cybersecurity, Software Engineering, Data Science, AI/ML, Cloud Computing, and more
 Live O*NET API integration showing real salary data and job growth projections
