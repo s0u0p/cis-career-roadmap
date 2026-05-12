@@ -20,9 +20,9 @@ A personalized roadmap website that walks students through six sequential steps:
 
 ## Key Features
 
-Weighted scoring engine that matches students to 12 career fields including Cybersecurity, Software Engineering, Data Science, AI/ML, Cloud Computing, and more
-Live O*NET API integration showing real salary data and job growth projections
-Downloadable PDF report personalized with the student's name, major, and career matches
-Session-only data storage — all student information disappears when the browser tab is closed for privacy
-Towson University branding with official Proxima Nova and Kandal fonts
+Weighted scoring engine that matches students to 12 career fields including Cybersecurity, Software Engineering, Data Science, AI/ML, Cloud Computing, and more.
+Live O*NET API integration showing real salary data and job growth projections.
+Downloadable PDF report personalized with the student's name, major, and career matches.
+Session-only data storage — all student information disappears when the browser tab is closed for privacy.
+Towson University branding with official Proxima Nova and Kandal fonts.
 Fully deployed on Vercel at cis-career-roadmap1.vercel.app
