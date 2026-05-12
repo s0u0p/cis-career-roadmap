@@ -189,28 +189,51 @@ export default function AdaptabilityFlexibility() {
             <h3 className="font-bold text-xl mb-4">Adaptability Resources</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  Change Management Guide
+                <a 
+                href="#https://www.gartner.com/en/information-technology"
+                target="_blank"
+                rel="noopener noreferrer" 
+                className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Gartner IT Trends & Reports
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  Career Pivot Planning Tool
+                <a 
+                href="https://roadmap.sh/"
+                target="_blank"
+                rel="noopener noreferrer" 
+                className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  roadmap.sh — Developer Learning Paths
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  Resilience Building Workshop
+                <a
+                href="https://stackoverflow.com/jobs/developer-survey"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Stack Overflow Developer Survey
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  Industry Trend Reports
+                <a 
+                href="https://www.coursera.org/articles/transferable-skills"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                  Coursera - Transferable Skills Guide
                 </a>
               </li>
               <li>
-                <a href="#" className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
-                  Transferable Skills Assessment
+                <a
+                href="https://techcrunch.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                  TechCrunch
                 </a>
               </li>
             </ul>
@@ -272,8 +295,9 @@ export default function AdaptabilityFlexibility() {
           >
             Review All Steps
           </Link>
-          <a href="mailto:cisadvising@towson.edu" className="px-8 py-3 bg-white text-teal-700 rounded-lg hover:bg-gray-100 transition-colors font-medium">
-          Schedule an advising pppointment
+          <a href="mailto:blaws@towson.edu" className="px-8 py-3 bg-white text-teal-700 rounded-lg hover:bg-gray-100 transition-colors font-medium">
+          Schedule an advising appointment
+          <br />with Mr. Laws (Career Advising Specialist)
           </a>
         </div>
       </div>

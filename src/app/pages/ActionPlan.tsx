@@ -415,7 +415,7 @@ export default function ActionPlan() {
       <div className="bg-white rounded-lg shadow-md p-8 mb-12">
         <h2 className="text-2xl font-bold mb-1">My Action Plan</h2>
         <p className="text-gray-500 text-sm mb-4">
-          Summarize your personal action plan in 200 characters or fewer. This will appear in your PDF report.
+          Summarize your personal action plan in 500 characters or fewer. This will appear in your PDF report.
         </p>
         <textarea
           value={actionPlan}

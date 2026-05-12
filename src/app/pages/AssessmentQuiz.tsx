@@ -280,7 +280,7 @@ export default function AssessmentQuiz() {
               </CardTitle>
               {isMultiSelect && (
                 <p className="text-sm text-black/70 mt-1">
-                  Select up to {maxSelections} �{" "}
+                  Select up to {maxSelections} {" - "}
                   {((answers[currentQuestion] as string[]) || []).length} selected
                 </p>
               )}

@@ -69,11 +69,11 @@ const certifications: Record<string, CertEntry[]> = {
       level: "Professional",
     },
     {
-      name: "Google Associate Android Developer",
-      description: "Build Android apps using industry best practices",
-      url: "https://developers.google.com/certification/associate-android-developer",
-      duration: "2–4 months",
-      level: "Associate",
+      name: "PCEP™ – Certified Entry-Level Python Programmer",
+      description: "Build basic Python programs",
+      url: "https://pythoninstitute.org/pcep",
+      duration: "4-8 weeks",
+      level: "Entry",
     },
   ],
   web_development: [
@@ -149,7 +149,7 @@ const certifications: Record<string, CertEntry[]> = {
     {
       name: "Oracle Database Administrator",
       description: "Design and manage Oracle database systems",
-      url: "https://education.oracle.com/oracle-database-administrator/trackp_248",
+      url: "https://education.oracle.com/oracle-database-administration-2019-certified-professional/trackp_DB19COCP",
       duration: "4–6 months",
       level: "Professional",
     },
@@ -264,7 +264,7 @@ const certifications: Record<string, CertEntry[]> = {
     {
       name: "CBAP",
       description: "Certified Business Analysis Professional from IIBA",
-      url: "https://www.iiba.org/certifications/cbap/",
+      url: "https://www.iiba.org/business-analysis-certifications/cbap/",
       duration: "6–12 months",
       level: "Professional",
     },

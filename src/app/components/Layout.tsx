@@ -143,7 +143,7 @@ export default function Layout() {
             <div>
               <h3 className="font-bold mb-3">Contact</h3>
               <p className="text-sm text-gray-300">
-                Email: cisadvising@towson.edu<br />
+                Email: blaws@towson.edu<br />
                 Phone: (410) 704-2633
               </p>
             </div>
