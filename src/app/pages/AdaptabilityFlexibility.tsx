@@ -190,12 +190,12 @@ export default function AdaptabilityFlexibility() {
             <ul className="space-y-3">
               <li>
                 <a 
-                href="#https://www.gartner.com/en/information-technology"
+                href="https://octoverse.github.com/"
                 target="_blank"
                 rel="noopener noreferrer" 
                 className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  Gartner IT Trends & Reports
+                  GitHub Octoverse
                 </a>
               </li>
               <li>
@@ -210,7 +210,7 @@ export default function AdaptabilityFlexibility() {
               </li>
               <li>
                 <a
-                href="https://stackoverflow.com/jobs/developer-survey"
+                href="https://survey.stackoverflow.co/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block p-3 bg-white rounded-lg hover:bg-gray-50 transition-colors"
